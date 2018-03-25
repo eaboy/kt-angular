@@ -14,6 +14,10 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths" : {
+      "@services/*": ["app/shared/services/*"],
+      "@components/*": ["app/main-components/*", "app/shared/components/*"]
+    }
   }
 }
