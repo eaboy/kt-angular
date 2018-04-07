@@ -9,12 +9,14 @@ import { LoginComponent } from './login/login.component';
 import { LoginService } from "./login.service";
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { AppRoutingModule } from "./app-routing/app-routing.module";
+import { ArticlesListComponent } from './articles-list/articles-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    ArticlesListComponent
   ],
   imports: [
     BrowserModule,
