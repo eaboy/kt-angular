@@ -12,7 +12,7 @@ export class AppComponent {
   title = 'app';
 
   constructor(private comService: CommunicationService) {
-    this.comService.getData(`${environment.backEndUrl}/articles/all/`).subscribe( value => {
+    this.comService.getData(`${environment.apiUrl}/articles/all/`).subscribe( value => {
       console.log(value);
     });
   }
