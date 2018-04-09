@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
+import { HttpModule  } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from "./app-routing/app-routing.module";
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -28,6 +29,7 @@ import { FooterComponent } from '@components/footer/footer.component';
   imports: [
     BrowserModule,
     HttpClientModule,
+    HttpModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,

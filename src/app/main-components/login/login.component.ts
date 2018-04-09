@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
   formulario: FormGroup;
 
   constructor( private cookieservice: CookieService,
-               private _loginService: LoginService,
                private _formBuilder: FormBuilder,
                private _authService: AuthService) { }
 
@@ -31,17 +30,18 @@ export class LoginComponent implements OnInit {
 
 
   loginUser(){
-
-    this._loginService.login(this.formulario.value).subscribe(data =>{
-      if(data.status === 'success') {
-        this._authService.token = data.token;
+    this._authService.login(this.formulario.value).subscribe(data =>{
+      if(data.status==200){
+        if(data.json()['status']=='success'){
+          this.cookieservice.put('token', data.json()['token']);
+          console.log(this.cookieservice.get('token'));
+        }else{
+          console.log('Invalid Credentials');
+        }
+      }else{
+        console.log("Some error occured")
       }
-
-    })
-  	
+    });	
   }
-
-
-
 
 }
