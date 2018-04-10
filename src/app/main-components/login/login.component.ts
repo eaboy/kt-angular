@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import {User} from '../beans/User';
+import {User} from '../../beans/User';
 
 import { CookieService } from 'angular2-cookie/core';
-import { LoginService } from "../login.service";
+import { LoginService } from '@services/login/login.service';
+import { AuthService } from '@services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,42 +18,30 @@ export class LoginComponent implements OnInit {
   formulario: FormGroup;
 
   constructor( private cookieservice: CookieService,
-               private auth: LoginService,
-               private _formBuilder: FormBuilder) { }
+               private _formBuilder: FormBuilder,
+               private _authService: AuthService) { }
 
   ngOnInit() {
      this.formulario = this._formBuilder.group({
-          user:['', Validators.required],
+          username:['', Validators.required],
           password:['', Validators.required]
      });
   }
 
 
-  LoginUser(){
-
-    console.log(this.user);
-    //this.user.usuario = this.formulario.get('user').value;
-    //this.user.password = this.formulario.get('password').value;
-    this.auth.login(this.user).subscribe(data =>{
-      console.log(data);
-    /*  if(data.status==200){
+  loginUser(){
+    this._authService.login(this.formulario.value).subscribe(data =>{
+      if(data.status==200){
         if(data.json()['status']=='success'){
           this.cookieservice.put('token', data.json()['token']);
+          console.log(this.cookieservice.get('token'));
         }else{
           console.log('Invalid Credentials');
         }
-      }
-      else{
+      }else{
         console.log("Some error occured")
       }
-*/
-
-    })
-  	
+    });	
   }
-    get diagnostic() { return JSON.stringify(this.user); }
-
-
-
 
 }
