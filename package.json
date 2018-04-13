@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build -prod --base-href /path --deploy '/static/files/path/",
+    "build": "ng build -prod --output-hashing=none",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -24,7 +24,7 @@
     "@ng-bootstrap/ng-bootstrap": "^1.1.1",
     "angular-font-awesome": "^3.1.2",
     "angular2-cookie": "^1.2.6",
-    "bootstrap": "^4.0.0-alpha.6",
+    "bootstrap": "^4.1.0",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
     "http": "0.0.0",
