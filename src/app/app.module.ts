@@ -4,7 +4,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { HttpModule  } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from "./app-routing/app-routing.module";
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { CommunicationService } from '@services/communication/communication.service';
 import { LoginService } from '@services/login/login.service';
@@ -32,8 +31,7 @@ import { FooterComponent } from '@components/footer/footer.component';
     HttpModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
-    AngularFontAwesomeModule
+    ReactiveFormsModule
   ],
   providers: [
     LoginService,
