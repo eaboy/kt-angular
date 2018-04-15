@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "../codertexts/articles/templates/angular",
       "assets": [
         "assets",
         "favicon.ico"
