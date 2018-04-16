@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build -prod --base-href /path --deploy '/static/files/path/",
+    "build": "ng build -prod --output-hashing=none",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -22,9 +22,8 @@
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
     "@ng-bootstrap/ng-bootstrap": "^1.1.1",
-    "angular-font-awesome": "^3.1.2",
     "angular2-cookie": "^1.2.6",
-    "bootstrap": "^4.0.0-alpha.6",
+    "bootstrap": "4.0.0-alpha.6",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
     "http": "0.0.0",
@@ -32,6 +31,7 @@
     "ngx-bootstrap": "^2.0.3",
     "popper.js": "^1.14.3",
     "rxjs": "^5.5.6",
+    "tether": "^1.4.3",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {

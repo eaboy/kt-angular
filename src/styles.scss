@@ -1,6 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
-
-@import "~bootstrap/dist/css/bootstrap.css";
 /**
 Fuentes
 **/
@@ -48,6 +45,8 @@ html {
  }
  
  body {
+	padding-top: 4.5rem;
+    padding-top: 4.5rem;
     word-wrap: break-word;
     text-rendering: optimizeLegibility;
     -webkit-overflow-scrolling: touch;
@@ -110,10 +109,38 @@ html {
     padding: .5rem .75rem;
 }
 
-.texto-blanco{
+.texto-gris {
     font-family: "metropolis-medium";
-    color: white;
-    cursor: pointer
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.texto-gris:hover {
+    cursor: pointer;
+    text-decoration: none;
+    color: #EA3A01;
+}
+
+.texto-gris a {
+    font-family: "metropolis-medium";
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+.texto-gris a:hover {
+    cursor: pointer;
+    text-decoration: none;
+    color: #EA3A01;
+}
+
+.texto-gris a:visited {
+    font-family: "metropolis-medium";
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .bg-inverse {
@@ -125,7 +152,7 @@ html {
  * ## Estilo para los artículos
  * ------------------------------------------------------------------- */
 
-.heading-title{
+ .heading-title{
     padding-top: 25px;
 }
 
@@ -133,6 +160,7 @@ h1 {
     padding-top: 125px;
 }
 
+ 
  .caja_articulo {
     padding: 0 20px;
     margin-bottom: 20px;
@@ -625,7 +653,7 @@ h1 {
     outline: none;
     color: #151515;
     font-family: "metropolis-medium", sans-serif;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     line-height: 3rem;
     max-width: 100%;
     background: transparent;
@@ -634,10 +662,10 @@ h1 {
     transition: all 0.3s ease-in-out;
  }
 
- textarea {
+  textarea {
       height: 50rem;
  }
-
+ 
  input[type="datetime"] {
 
     display: block;
@@ -645,7 +673,7 @@ h1 {
     outline: none;
     color: #1C0113;
     font-family: "metropolis-medium", sans-serif;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     line-height: 2rem;
     max-width: 100%;
     background: transparent;
@@ -810,8 +838,6 @@ h1 {
 }
 
 
-
-
  /* ------------------------------------------------------------------- 
   * ## Style Placeholder Text
   * ------------------------------------------------------------------- */
@@ -850,6 +876,7 @@ h1 {
     width: 100%;
     margin-right: 10px;
  }
+
 
  /* ===================================================================
  * # buttons
@@ -921,7 +948,6 @@ input[type="button"].btn--primary:focus {
    background: #EA3A01;
    border-color: #EA3A01;
 }
-
 
 nav button{
     height: 3rem;
@@ -1123,8 +1149,8 @@ nav button{
     width: 5.4rem;
     line-height: 5.4rem;
     text-align: center;
-    background-image: url(./assets/icons/icon-arrow-up.svg);
-    background-color: #EA3A01;
+    background-image: url("./assets/icons/icon-arrow-up.svg");
+	background-color: #EA3A01;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 10px 16px;

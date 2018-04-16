@@ -4,12 +4,12 @@ import { HttpClientModule } from "@angular/common/http";
 import { HttpModule  } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from "./app-routing/app-routing.module";
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { CommunicationService } from '@services/communication/communication.service';
-import { LoginService } from '@services/login/login.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { AuthService } from '@services/auth/auth.service';
+import { UsersService } from '@services/users/users.service';
+import { ArticlesService } from '@services/articles/articles.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from '@components/login/login.component';
@@ -32,14 +32,14 @@ import { FooterComponent } from '@components/footer/footer.component';
     HttpModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
-    AngularFontAwesomeModule
+    ReactiveFormsModule
   ],
   providers: [
-    LoginService,
     CookieService,
     CommunicationService,
-    AuthService
+    AuthService,
+    UsersService,
+    ArticlesService
   ],
   bootstrap: [AppComponent]
 })
