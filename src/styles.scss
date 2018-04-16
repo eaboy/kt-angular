@@ -45,9 +45,7 @@ html {
  }
  
  body {
-	min-height: 75rem;
 	padding-top: 4.5rem;
-    min-height: 75rem;
     padding-top: 4.5rem;
     word-wrap: break-word;
     text-rendering: optimizeLegibility;
@@ -111,10 +109,38 @@ html {
     padding: .5rem .75rem;
 }
 
-.texto-blanco{
+.texto-gris {
     font-family: "metropolis-medium";
-    color: white;
-    cursor: pointer
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.texto-gris:hover {
+    cursor: pointer;
+    text-decoration: none;
+    color: #EA3A01;
+}
+
+.texto-gris a {
+    font-family: "metropolis-medium";
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+.texto-gris a:hover {
+    cursor: pointer;
+    text-decoration: none;
+    color: #EA3A01;
+}
+
+.texto-gris a:visited {
+    font-family: "metropolis-medium";
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .bg-inverse {
@@ -627,7 +653,7 @@ h1 {
     outline: none;
     color: #151515;
     font-family: "metropolis-medium", sans-serif;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     line-height: 3rem;
     max-width: 100%;
     background: transparent;
@@ -647,7 +673,7 @@ h1 {
     outline: none;
     color: #1C0113;
     font-family: "metropolis-medium", sans-serif;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     line-height: 2rem;
     max-width: 100%;
     background: transparent;
@@ -850,6 +876,7 @@ h1 {
     width: 100%;
     margin-right: 10px;
  }
+
 
  /* ===================================================================
  * # buttons
@@ -1122,7 +1149,7 @@ nav button{
     width: 5.4rem;
     line-height: 5.4rem;
     text-align: center;
-    background-image: url(./assets/icons/icon-arrow-up.svg);
+    background-image: url("./assets/icons/icon-arrow-up.svg");
 	background-color: #EA3A01;
     background-repeat: no-repeat;
     background-position: center center;

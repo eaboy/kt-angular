@@ -4,7 +4,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {User} from '../../beans/User';
 
 import { CookieService } from 'angular2-cookie/core';
-import { LoginService } from '@services/login/login.service';
 import { AuthService } from '@services/auth/auth.service';
 
 @Component({
