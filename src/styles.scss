@@ -647,7 +647,7 @@ h1 {
  textarea,
  select {
     display: block;
-    height: 6rem;
+    height: 3rem;
     padding: 1.5rem 0;
     border: 0;
     outline: none;
@@ -660,10 +660,6 @@ h1 {
     border-bottom: 2px solid rgba(0, 0, 0, 0.5);
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
- }
-
-  textarea {
-      height: 50rem;
  }
  
  input[type="datetime"] {
