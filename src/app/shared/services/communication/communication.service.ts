@@ -13,7 +13,8 @@ export class CommunicationService {
     private setHeaders() {
         const httpOptions = {
             // headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Token ${this._cookieService.get('token')}` })
-            headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+            headers: new HttpHeaders({ 'Content-Type': 'application/json', 'X-CSRFToken': this._cookieService.get('csrftoken')}),
+            withCredentials: true
         };
         return httpOptions;
     }

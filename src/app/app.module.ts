@@ -16,6 +16,8 @@ import { LoginComponent } from '@components/login/login.component';
 import { ArticlesListComponent } from '@components//articles-list/articles-list.component';
 import { HeaderComponent } from '@components/header/header.component';
 import { FooterComponent } from '@components/footer/footer.component';
+import { RouterModule } from "@angular/router";
+
 
 
 @NgModule({
@@ -28,11 +30,12 @@ import { FooterComponent } from '@components/footer/footer.component';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     HttpModule,
+    HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   providers: [
     CookieService,

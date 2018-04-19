@@ -5,7 +5,13 @@ import { LoginComponent } from "@components/login/login.component";
 import { ArticlesListComponent } from "@components/articles-list/articles-list.component";
 
 const appRoutes: Routes = [
-	{
+    
+    {
+		path: 'private',
+		redirectTo: '/',
+    },
+    
+    {
 		path: 'login',
 		component: LoginComponent,
     },
