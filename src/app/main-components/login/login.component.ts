@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-import {User} from '../../beans/User';
-
-import { CookieService } from 'angular2-cookie/core';
-import { AuthService } from '@services/auth/auth.service';
+import { UsersService } from '@services/users/users.service';
+import { Login } from '@interfaces/users';
 
 @Component({
   selector: 'app-login',
@@ -13,12 +10,10 @@ import { AuthService } from '@services/auth/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  public user: User;
+  public login: Login;
   formulario: FormGroup;
 
-  constructor( private cookieservice: CookieService,
-               private _formBuilder: FormBuilder,
-               private _authService: AuthService) { }
+  constructor( private _userService: UsersService, private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
      this.formulario = this._formBuilder.group({
@@ -27,19 +22,9 @@ export class LoginComponent implements OnInit {
      });
   }
 
-
   loginUser(){
-    this._authService.login(this.formulario.value).subscribe(data =>{
-      if(data.status==200){
-        if(data.json()['status']=='success'){
-          this.cookieservice.put('token', data.json()['token']);
-          console.log(this.cookieservice.get('token'));
-        }else{
-          console.log('Invalid Credentials');
-        }
-      }else{
-        console.log("Some error occured")
-      }
+    this._userService.loginUser(this.formulario.value).subscribe(data =>{
+      console.log(data);
     });	
   }
 

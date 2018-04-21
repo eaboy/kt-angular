@@ -2,21 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
-import { CookieService } from 'angular2-cookie/core';
 import { environment } from 'environments/environment';
+import { AuthService } from '@services/auth/auth.service';
 
 @Injectable()
 export class CommunicationService {
 
-    constructor(private _http: HttpClient, private _cookieService: CookieService) { }
+    constructor(private _http: HttpClient, private _authService: AuthService) { }
 
     private setHeaders() {
-        const httpOptions = {
-            // headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Token ${this._cookieService.get('token')}` })
-            headers: new HttpHeaders({ 'Content-Type': 'application/json', 'X-CSRFToken': this._cookieService.get('csrftoken')}),
-            withCredentials: true
-        };
-        return httpOptions;
+        const token = this._authService.token;
+        const headers = token? { 'Content-Type': 'application/json', 'Authorization': `Bearer ${this._authService.token}` } : { 'Content-Type': 'application/json' };
+        return { headers: new HttpHeaders(headers) };
     }
     private baseUrl = environment.apiUrl;
 

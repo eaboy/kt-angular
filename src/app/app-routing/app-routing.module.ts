@@ -7,17 +7,18 @@ import { ArticlesListComponent } from "@components/articles-list/articles-list.c
 const appRoutes: Routes = [
     
     {
-		path: 'private',
-		redirectTo: '/',
+        path: '',
+        pathMatch: 'full',
+		redirectTo: 'login',
     },
     
     {
 		path: 'login',
-		component: LoginComponent,
+		component: LoginComponent
     },
     {
 		path: 'articles-list',
-		component: ArticlesListComponent,
+		component: ArticlesListComponent
 	}
 ]
 
