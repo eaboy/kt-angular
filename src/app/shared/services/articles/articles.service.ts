@@ -15,6 +15,14 @@ export class ArticlesService {
 
   constructor(private _CommunicationService: CommunicationService) {
   }
+  
+  getArticle(id_article){
+    return this._CommunicationService.getData(`${this.articlePath}`+id_article);
+  }
+
+  editArticle(id_article, article: Article){
+    return this._CommunicationService.editData(`${this.articlePath}`+id_article, article);
+  }
 
   createArticle(article: Article){
     return this._CommunicationService.postData(`${this.articlePath}new/`, article);

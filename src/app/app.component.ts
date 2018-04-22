@@ -8,14 +8,7 @@ import { AuthService } from "@services/auth/auth.service";
 })
 export class AppComponent {
 
-<<<<<<< HEAD
   constructor() { 
     
-=======
-  constructor(private comService: CommunicationService) {
-    this.comService.getData(`${environment.apiUrl}/articles/all/`).subscribe( value => {
-      //console.log(value);
-    });
->>>>>>> jlpilo003
   }
 }

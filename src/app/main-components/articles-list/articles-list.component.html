@@ -8,7 +8,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let article of articles$ | async">
-        <td>{{ article.id }}</td><td><img src={{ article.image }} alt="Imagen" width="300 px"></td><td>{{ article.title }}</td><td>{{ article.id_user }}</td><td>{{ article.pub_date }}</td>
+        <td>{{ article.id }}</td><td><img src="{{ article.image }}" alt="Imagen" width="300 px"></td><td>{{ article.title }}</td><td>{{ article.id_user }}</td><td>{{ article.pub_date }}</td>
       </tr>
     </tbody>
   </table>
