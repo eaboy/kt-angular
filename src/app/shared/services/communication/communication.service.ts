@@ -11,8 +11,8 @@ export class CommunicationService {
     constructor(private _http: HttpClient, private _authService: AuthService) { }
 
     private setHeaders() {
-        const token = this._authService.token;
-        const headers = token? { 'Content-Type': 'application/json', 'Authorization': `Bearer ${this._authService.token}` } : { 'Content-Type': 'application/json' };
+        const token = this._authService.getToken();
+        const headers = token? { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` } : { 'Content-Type': 'application/json' };
         return { headers: new HttpHeaders(headers) };
     }
     private baseUrl = environment.apiUrl;

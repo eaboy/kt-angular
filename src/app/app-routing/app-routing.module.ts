@@ -3,22 +3,24 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from "@components/login/login.component";
 import { ArticlesListComponent } from "@components/articles-list/articles-list.component";
+import { AuthService } from '@services/auth/auth.service';
+import { AppComponent } from '../app.component';
 
 const appRoutes: Routes = [
-    
+
     {
-        path: '',
-        pathMatch: 'full',
-		redirectTo: 'login',
-    },
-    
+		path: '',
+        component: AppComponent,
+        canActivate: [AuthService]
+    },    
     {
 		path: 'login',
 		component: LoginComponent
     },
     {
 		path: 'articles-list',
-		component: ArticlesListComponent
+        component: ArticlesListComponent,
+        canActivate: [AuthService]
 	}
 ]
 

@@ -1,21 +1,44 @@
 import { Injectable } from '@angular/core';
+import { Router, CanActivate } from '@angular/router';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
-export class AuthService {
-  
-  private _token: string;
+export class AuthService implements CanActivate {
 
-  get token(): string {
-    return this._token
+  private authSubj = new Subject<boolean>();
+  private authenticated: boolean;
+
+  constructor(private router: Router) {}
+
+  canActivate(): boolean {
+    if (!this.authenticated) {
+      this.router.navigate(['login']);
+      return false;
+    }
+    return true;
   }
 
-  set token(newToken) {
-    this._token = newToken;
+  getToken(): string {
+    return localStorage.getItem('token');
   }
 
-  deleteToken() {
-    this._token = null;
+  setToken(token): void {
+    localStorage.setItem('token', token);
+    this.changeAuthStatus(true);
   }
 
+  deleteToken(): void {
+    localStorage.removeItem('token');
+    this.changeAuthStatus(false);
+  }
+
+  isAuthenticated(): Subject<boolean> {
+    return this.authSubj;
+  }
+
+  changeAuthStatus(newStatus: boolean): void {
+    this.authSubj.next(newStatus);
+    this.authenticated = newStatus;
+  }
 
 }
