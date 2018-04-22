@@ -22,13 +22,15 @@
         "../node_modules/font-awesome/css/font-awesome.min.css",
         "../node_modules/tether/dist/css/tether.min.css",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "styles.scss"  
+        "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+        "styles.scss"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/tether/dist/js/tether.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
-        "assets/js/main.js"
+        "assets/js/main.js",
+        "../node_modules/moment/min/moment.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

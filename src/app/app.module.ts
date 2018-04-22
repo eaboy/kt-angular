@@ -16,6 +16,9 @@ import { LoginComponent } from '@components/login/login.component';
 import { ArticlesListComponent } from '@components//articles-list/articles-list.component';
 import { HeaderComponent } from '@components/header/header.component';
 import { FooterComponent } from '@components/footer/footer.component';
+import { ArticleComponent } from './main-components/article/article.component';
+import { QuillModule } from 'ngx-quill';
+import { BsDatepickerModule } from 'ngx-bootstrap';
 
 
 
@@ -25,7 +28,8 @@ import { FooterComponent } from '@components/footer/footer.component';
     LoginComponent,
     ArticlesListComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ArticleComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,9 @@ import { FooterComponent } from '@components/footer/footer.component';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    QuillModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [
     CookieService,
@@ -44,4 +50,6 @@ import { FooterComponent } from '@components/footer/footer.component';
   ],
   bootstrap: [AppComponent]
 })
+
+
 export class AppModule { }
