@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { CommunicationService } from './shared/services/communication/communication.service';
-
-import { environment } from '../environments/environment';
+import { AuthService } from "@services/auth/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -9,11 +7,8 @@ import { environment } from '../environments/environment';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
 
-  constructor(private comService: CommunicationService) {
-    this.comService.getData(`${environment.apiUrl}/articles/all/`).subscribe( value => {
-      console.log(value);
-    });
+  constructor() { 
+    
   }
 }

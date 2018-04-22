@@ -5,13 +5,20 @@ import { LoginComponent } from "@components/login/login.component";
 import { ArticlesListComponent } from "@components/articles-list/articles-list.component";
 
 const appRoutes: Routes = [
-	{
+    
+    {
+        path: '',
+        pathMatch: 'full',
+		redirectTo: 'login',
+    },
+    
+    {
 		path: 'login',
-		component: LoginComponent,
+		component: LoginComponent
     },
     {
 		path: 'articles-list',
-		component: ArticlesListComponent,
+		component: ArticlesListComponent
 	}
 ]
 

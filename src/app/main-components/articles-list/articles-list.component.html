@@ -1,13 +1,9 @@
-<h1>Listado de articulos</h1>
+<h1>Listado de artículos</h1>
 <div class="container">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Id</th><th>Titulo</th><th>Autor</th><th>Fechas de publicación</th>
-      </tr>
-      <tr>
-        <td>{{ lista.id }}</td><td>{{ lista.name }}</td><td>jlpilo</td><td>12/03/2018</td>
-      </tr>
-    </thead>
-  </table>
+  <li *ngFor="let article of articles$ | async">
+    {{ article.title }}
+    <div>
+      <img src={{article.image}} alt="Imagen" width="300 px">
+    </div>
+  </li>
 </div>

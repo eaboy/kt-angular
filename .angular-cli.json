@@ -1,12 +1,12 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "kt-angular"
+    "name": "CoderText Private"
   },
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "../codertexts/articles/templates/angular",
       "assets": [
         "assets",
         "favicon.ico"
