@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from "@components/login/login.component";
 import { ArticlesListComponent } from "@components/articles-list/articles-list.component";
+import { ArticleComponent } from "@components/article/article.component";
 
 const appRoutes: Routes = [
 	{
@@ -12,6 +13,14 @@ const appRoutes: Routes = [
     {
 		path: 'articles-list',
 		component: ArticlesListComponent,
+    },
+    {
+		path: 'article',
+		component: ArticleComponent,
+    },
+    {
+		path: 'article/:postId',
+		component: ArticleComponent,
 	}
 ]
 

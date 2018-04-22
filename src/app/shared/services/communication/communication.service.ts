@@ -8,10 +8,15 @@ import { CookieService } from 'angular2-cookie/core';
 export class CommunicationService {
 
     constructor(private _http: HttpClient, private _cookieService: CookieService) { }
+    user = 'jlpilo';
+    pass = 'jlpilo123';
 
+    user_pass = `${this.user}:${this.pass}`;
+    auth = `Basic ${btoa(this.user_pass)}`;
     private setHeaders() {
         const httpOptions = {
-            headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Token ${this._cookieService.get('token')}` })
+            //headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Token ${this._cookieService.get('token')}` })
+            headers: new HttpHeaders({ 'Content-Type': 'application/json','Authorization': this.auth })
         };
         return httpOptions;
     }

@@ -15,6 +15,9 @@ import { LoginComponent } from '@components/login/login.component';
 import { ArticlesListComponent } from '@components//articles-list/articles-list.component';
 import { HeaderComponent } from '@components/header/header.component';
 import { FooterComponent } from '@components/footer/footer.component';
+import { ArticleComponent } from './main-components/article/article.component';
+import { QuillModule } from 'ngx-quill';
+import { BsDatepickerModule } from 'ngx-bootstrap';
 
 
 @NgModule({
@@ -23,7 +26,8 @@ import { FooterComponent } from '@components/footer/footer.component';
     LoginComponent,
     ArticlesListComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ArticleComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,9 @@ import { FooterComponent } from '@components/footer/footer.component';
     HttpModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    QuillModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [
     LoginService,
@@ -41,4 +47,6 @@ import { FooterComponent } from '@components/footer/footer.component';
   ],
   bootstrap: [AppComponent]
 })
+
+
 export class AppModule { }

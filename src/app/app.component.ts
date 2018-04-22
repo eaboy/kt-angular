@@ -13,7 +13,7 @@ export class AppComponent {
 
   constructor(private comService: CommunicationService) {
     this.comService.getData(`${environment.apiUrl}/articles/all/`).subscribe( value => {
-      console.log(value);
+      //console.log(value);
     });
   }
 }
