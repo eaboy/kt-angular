@@ -9,16 +9,18 @@ import { AuthService } from '@services/auth/auth.service';
 export class CommunicationService {
 
     constructor(private _http: HttpClient, private _authService: AuthService) { }
-    user = 'jlpilo';
+    /*user = 'jlpilo';
     pass = 'jlpilo123';
 
     user_pass = `${this.user}:${this.pass}`;
-    auth = `Basic ${btoa(this.user_pass)}`;
+    auth = `Basic ${btoa(this.user_pass)}`;*/
 
     private setHeaders() {
-        const token = this._authService.token;
-        const headers = token? { 'Content-Type': 'application/json', 'Authorization': `Bearer ${this._authService.token}` } : { 'Content-Type': 'application/json','Authorization': this.auth  };
+        /*this._authService.getToken();
+        const headers = token? { 'Content-Type': 'application/json', 'Authorization': `Bearer ${this._authService.token}` } : { 'Content-Type': 'application/json','Authorization': this.auth  };*/
         
+        const token = this._authService.getToken();
+        const headers = token? { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` } : { 'Content-Type': 'application/json' };
         return { headers: new HttpHeaders(headers) };
     }
     private baseUrl = environment.apiUrl;
