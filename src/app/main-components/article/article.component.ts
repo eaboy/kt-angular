@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommunicationService } from '../../shared/services/communication/communication.service';
 import { ArticlesService } from '../../shared/services/articles/articles.service';
 import { Article } from '../../interfaces/articles';
+import { Category } from '../../interfaces/category';
 import * as moment from 'moment';
 import { FormGroup, FormControl, FormArray, NgForm,FormBuilder } from '@angular/forms';
 import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
@@ -16,6 +17,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./article.component.scss'],
   providers:[CommunicationService]
 })
+
 export class ArticleComponent implements OnInit {
   private articleForm: FormGroup;
   constructor(private _commumicationservice: CommunicationService,
@@ -23,8 +25,11 @@ export class ArticleComponent implements OnInit {
               private _activatedRoute: ActivatedRoute,
               private location: Location,) { }
 
-  postId: Article
+  postId: Article;
   postData$: Observable<Article[]>;
+  title_post:string;
+  listcategories$: Observable<Category[]>;
+  
 
   ngOnInit() {
     this.articleForm = new FormGroup({
@@ -39,12 +44,18 @@ export class ArticleComponent implements OnInit {
       'image':new FormControl(),
       'video':new FormControl(),
     });
+    this.listcategories$= this._articlesservice.listCategories();
+    console.log(this.listcategories$);
+    this.title_post ='Nueva Entrada';
     this._activatedRoute.params.subscribe(paramsId => {
       this.postId = paramsId.postId;
     });
+
+    
+
     if(this.postId){
-      console.log('lll');
-      var url=`${'/article/'+this.postId}`;
+      this.title_post = `${'Editando entrada ID: '+this.postId}`
+      //var url=`${'/article/'+this.postId}`;
       var postData = this._articlesservice.getArticle(this.postId).subscribe(data =>{
         console.log(data.categories);
         if(data.id){
@@ -59,31 +70,30 @@ export class ArticleComponent implements OnInit {
           'status': data.status,
           'image': data.image,
           'video': data.video
-          
       });
         }else{
           console.log("Some error occured")
+          alert("Ha ocurrido un error")
         };
       });
     }
   }
-  message:string;
+
   onSaveArticle(){
     const article: Article={
-                            id_article:this.articleForm.value.idpost,
-                            title:this.articleForm.value.title,
-                            id_user:2,
-                            text:this.articleForm.value.text,
-                            categories:this.articleForm.value.categories,
-                            pub_date: moment(this.articleForm.value.pub_date).format('YYYY-MM-DD'),
-                            slug: this.buildslug(this.articleForm.value.title),
-                            status: this.articleForm.value.status,
-                            image: this.articleForm.value.image,
-                            video: this.articleForm.value.video,
-                          };
+      id_article:this.articleForm.value.idpost,
+      title:this.articleForm.value.title,
+      id_user:2,
+      text:this.articleForm.value.text,
+      categories:this.articleForm.value.categories,
+      pub_date: moment(this.articleForm.value.pub_date).format('YYYY-MM-DD'),
+      slug: this.buildslug(this.articleForm.value.title),
+      status: this.articleForm.value.status,
+      image: this.articleForm.value.image,
+      video: this.articleForm.value.video,
+    };
     
     if(this.articleForm.value.idpost){
-      //var url=`${'/article/'+this.articleForm.value.idpost}`;
       this._articlesservice.editArticle(this.articleForm.value.idpost, article).subscribe(data =>{
         if(data.id){
           console.log('ok');
@@ -94,7 +104,6 @@ export class ArticleComponent implements OnInit {
         }
       });
     }else{
-      //var url='/article/new/';
       this._articlesservice.createArticle(article).subscribe(data =>{
         if(data.id){
           console.log('ok');
