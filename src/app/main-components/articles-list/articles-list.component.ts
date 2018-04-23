@@ -16,6 +16,6 @@ export class ArticlesListComponent implements OnInit {
 
   ngOnInit() {
     this.articles$=this._articlesService.listArticles();
-    console.log(this.articles$);
+    //console.log(this.articles$);
   }
 }

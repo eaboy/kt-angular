@@ -11,11 +11,10 @@ export class AuthService implements CanActivate {
   constructor(private router: Router) {}
 
   canActivate(): boolean {
-    if (!this.authenticated) {
+    if (!this.authenticated)
       this.router.navigate(['login']);
-      return false;
-    }
-    return true;
+    else
+      return true;
   }
 
   getToken(): string {
