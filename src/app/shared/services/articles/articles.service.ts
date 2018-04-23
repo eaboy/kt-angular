@@ -12,6 +12,7 @@ export class ArticlesService {
 
   private articlePath = `/article/`;
   private articlesPath = `/articles/`;
+  private categoriesPath = `/categories/all/`;
 
   constructor(private _CommunicationService: CommunicationService) {
   }
@@ -31,5 +32,10 @@ export class ArticlesService {
   listArticles(){
     return this._CommunicationService.getData(`${this.articlesPath}all/`);
   }
+
+  listCategories(){
+    return this._CommunicationService.getData(`${this.categoriesPath}`);
+  }
+
 
 }

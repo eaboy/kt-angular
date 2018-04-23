@@ -1,10 +1,9 @@
 
-{{postData}}
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div>
-                <h3 class="entry__title">Nueva entrada</h3>
+                <h3 class="entry__title">{{title_post}}</h3>
             </div>
         </div>
     </div>
@@ -21,16 +20,24 @@
                 
                 <div class="row">
                     <div class="col-md-4">
+                        <span>Fecha de publicación</span>
                         <div class="input-group">
                             <input id="fecha" name="pub_date" formControlName="pub_date" type="text" #dp="bsDatepicker" bsDatepicker [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'}" placeholder="Fecha publicación" class="form-control" value="">
                             <span class="input-group-addon btn btn-success" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen"><i class="fa fa-calendar"></i></span>
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-4">
                         <span>Categorías</span>
-                        <select multiple name="categories" id="category" formControlName="categories">
-                            <option value="1">orci</option>
-                            <option value="2">lectus</option>
+                        <select multiple name="categories" id="category" formControlName="categories" >
+                            <option *ngFor="let category of listcategories$ | async" [value]="categories">{{category.name}}</option>
+
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <span>Estado</span>
+                        <select name="status" id="status" formControlName="status" value="">
+                            <option value="borrador">Borrador</option>
+                            <option value="finalizado">Finalizado</option>
                         </select>
                     </div> 
                 </div>
