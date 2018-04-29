@@ -6,6 +6,7 @@ import { ArticlesListComponent } from "@components/articles-list/articles-list.c
 import { ArticleComponent } from "@components/article/article.component";
 import { AuthService } from '@services/auth/auth.service';
 import { AppComponent } from '../app.component';
+import { UserComponent } from '@components/user/user.component';
 
 const appRoutes: Routes = [
 
@@ -32,7 +33,12 @@ const appRoutes: Routes = [
 		path: 'article/:postId',
 		component: ArticleComponent,
         canActivate: [AuthService]
-	}
+    },
+    {
+        path: 'user',
+        component: UserComponent,
+        canActivate: [AuthService]
+    }
 ]
 
 @NgModule({
