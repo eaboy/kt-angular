@@ -21,6 +21,9 @@ import { QuillModule } from 'ngx-quill';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { UserComponent } from './main-components/user/user.component';
 
+import { AlertComponent } from './shared/directives/index';
+import { AlertService } from '@services/alerts/index';
+
 
 
 @NgModule({
@@ -32,6 +35,7 @@ import { UserComponent } from './main-components/user/user.component';
     FooterComponent,
     ArticleComponent,
     UserComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,8 @@ import { UserComponent } from './main-components/user/user.component';
     CommunicationService,
     AuthService,
     UsersService,
-    ArticlesService
+    ArticlesService,
+    AlertService
   ],
   bootstrap: [AppComponent]
 })

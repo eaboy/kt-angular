@@ -6,6 +6,7 @@
             </div>
         </div>
     </div>
+   
     <form name="formulario" id="formulario" method="post" action="" [formGroup]="articleForm">
         
         <div class="row">
@@ -73,7 +74,16 @@
                     </div>
                 </div>
                 <button (click)="onSaveArticle()">Guardar</button>
+                <button (click)="onDeleteArticle()">Borrar</button>
             </article>    <!-- fin del artículo -->
         </div>
     </form><!-- fin formulario-->
+    <div class="">
+        <div class="container">
+            <div class="col-sm-8 col-sm-offset-2">
+                <alert></alert>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
 </div>
