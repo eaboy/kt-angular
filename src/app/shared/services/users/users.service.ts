@@ -79,6 +79,7 @@ export class UsersService {
   }
 
   getUserId() {
+    this.extractTokenData();
     if(this.tokenData !== null){
       return this.tokenData.user_id;
     }
@@ -86,6 +87,7 @@ export class UsersService {
   }
 
   getUserName() {
+    this.extractTokenData();
     if(this.tokenData !== null){
       return this.tokenData.username;
     }

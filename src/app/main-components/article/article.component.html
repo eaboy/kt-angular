@@ -1,4 +1,3 @@
-
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -29,7 +28,7 @@
                     <div class="col-md-4">
                         <span>Categorías</span>
                         <select multiple name="categories" id="category" formControlName="categories" >
-                            <option *ngFor="let category of listcategories$ | async" [value]="categories">{{category.name}}</option>
+                            <option *ngFor="let category of listcategories$ | async" value={{category.id}} [value]="categories">{{category.name}}</option>
 
                         </select>
                     </div>
@@ -54,7 +53,7 @@
                         </div>
                         <div class="s-content__author-about">
                             <h4 class="s-content__author-name">
-                                <a href="#0">Jonathan Doe</a>
+                                <a href="#0">{{username}}</a>
                                 <span class="botonEstrella">
                                 <a href="#"  alt="Seguir" ><i class="fa fa-user"></i></a>
                                 </span>

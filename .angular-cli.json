@@ -9,7 +9,8 @@
       "outDir": "../codertexts/articles/templates/angular",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        "assets/icons"
       ],
       "index": "index.html",
       "main": "main.ts",
