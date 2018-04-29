@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Location } from '@angular/common';
 import { UsersService } from '@services/users/users.service';
+import { AlertService } from '@services/alerts/index';
 
 
 @Component({
@@ -25,7 +26,8 @@ export class ArticleComponent implements OnInit {
               private _articlesservice: ArticlesService,
               private _activatedRoute: ActivatedRoute,
               private location: Location,
-              private _usersservice: UsersService) { }
+              private _usersservice: UsersService,
+              private _alerservice: AlertService) { }
 
   postId: Article;
   postData$: Observable<Article[]>;
@@ -98,9 +100,9 @@ export class ArticleComponent implements OnInit {
     if(this.articleForm.value.idpost){
       this._articlesservice.editArticle(this.articleForm.value.idpost, article).subscribe(data =>{
         if(data.id){
-          alert("Datos guardados correctamente");
+          this._alerservice.success("Datos Guardados");
         }else{
-          alert("Error. Datos no guardados")
+          this._alerservice.error("Error. Datos no guardados");
         }
       });
     }else{
@@ -115,6 +117,16 @@ export class ArticleComponent implements OnInit {
       });
     }
    
+  }
+
+  onDeleteArticle(){
+    this._articlesservice.deleteArticle(this.postId).subscribe(data =>{
+      if(!data){
+        this._alerservice.success(`${"Articulo con id "+this.postId+" borrado correctamente"}`);
+      }else{
+        this._alerservice.error("Error. Articulo no borrado");
+      }
+    });
   }
 
   buildslug(text)
