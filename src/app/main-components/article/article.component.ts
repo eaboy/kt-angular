@@ -4,7 +4,7 @@ import { ArticlesService } from '../../shared/services/articles/articles.service
 import { Article } from '../../interfaces/articles';
 import { Category } from '../../interfaces/category';
 import * as moment from 'moment';
-import { FormGroup, FormControl, FormArray, NgForm,FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, NgForm, FormBuilder } from '@angular/forms';
 import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -23,7 +23,7 @@ export class ArticleComponent implements OnInit {
   constructor(private _commumicationservice: CommunicationService,
               private _articlesservice: ArticlesService,
               private _activatedRoute: ActivatedRoute,
-              private location: Location,) { }
+              private location: Location, ) { }
 
   postId: Article;
   postData$: Observable<Article[]>;

@@ -19,6 +19,7 @@ import { FooterComponent } from '@components/footer/footer.component';
 import { ArticleComponent } from './main-components/article/article.component';
 import { QuillModule } from 'ngx-quill';
 import { BsDatepickerModule } from 'ngx-bootstrap';
+import { UserComponent } from './main-components/user/user.component';
 
 
 
@@ -30,6 +31,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
     HeaderComponent,
     FooterComponent,
     ArticleComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,
