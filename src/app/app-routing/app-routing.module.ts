@@ -7,18 +7,23 @@ import { ArticleComponent } from "@components/article/article.component";
 import { AuthService } from '@services/auth/auth.service';
 import { AppComponent } from '../app.component';
 import { UserComponent } from '@components/user/user.component';
+import { LogoutComponent } from "@components/logout/logout.component";
 
 const appRoutes: Routes = [
 
     {
 		path: '',
-        component: AppComponent,
+        component: ArticlesListComponent,
         canActivate: [AuthService]
     },    
     {
 		path: 'login',
 		component: LoginComponent
     },
+    {
+		path: 'logout',
+		component: LogoutComponent
+    },    
     {
 		path: 'articles-list',
         component: ArticlesListComponent,
@@ -39,6 +44,8 @@ const appRoutes: Routes = [
         component: UserComponent,
         canActivate: [AuthService]
     }
+
+
 ]
 
 @NgModule({

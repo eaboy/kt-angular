@@ -29,6 +29,10 @@ export class ArticlesService {
     return this._CommunicationService.postData(`${this.articlePath}new/`, article);
   }
 
+  deleteArticle(id_article){
+    return this._CommunicationService.deleteData(`${this.articlePath}`+id_article);
+  }
+
   listArticles(id_user){
     //return this._CommunicationService.getData(`${this.articlesPath}all/`);
     return this._CommunicationService.getData(`${this.articlesPath}user/`+id_user);

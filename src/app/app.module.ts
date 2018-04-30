@@ -21,6 +21,11 @@ import { QuillModule } from 'ngx-quill';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { UserComponent } from './main-components/user/user.component';
 
+import { AlertComponent } from './shared/directives/index';
+import { AlertService } from '@services/alerts/index';
+import { FileInputAccessorModule } from "file-input-accessor";
+import { LogoutComponent } from "@components/logout/logout.component";
+
 
 
 @NgModule({
@@ -32,6 +37,8 @@ import { UserComponent } from './main-components/user/user.component';
     FooterComponent,
     ArticleComponent,
     UserComponent,
+    AlertComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -41,14 +48,16 @@ import { UserComponent } from './main-components/user/user.component';
     FormsModule,
     ReactiveFormsModule,
     QuillModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    FileInputAccessorModule
   ],
   providers: [
     CookieService,
     CommunicationService,
     AuthService,
     UsersService,
-    ArticlesService
+    ArticlesService,
+    AlertService
   ],
   bootstrap: [AppComponent]
 })

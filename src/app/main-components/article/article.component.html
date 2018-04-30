@@ -6,6 +6,7 @@
             </div>
         </div>
     </div>
+   
     <form name="formulario" id="formulario" method="post" action="" [formGroup]="articleForm">
         
         <div class="row">
@@ -72,8 +73,33 @@
                     <!--Fin Barra lateral del autor -->
                     </div>
                 </div>
-                <button (click)="onSaveArticle()">Guardar</button>
+                <div class="row">
+                    <div class="col-md-4">
+                        <span>URL Imagen destacada</span>
+                        <div class="input-group">
+                            <input id="image" name="image" formControlName="image" type="text"  value=""/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <span>URL video</span>
+                        <div class="input-group">
+                            <input id="video" name="video" formControlName="video" type="text"  value=""/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row_buttons">
+                    <button (click)="onSaveArticle()">Guardar</button>
+                    <button (click)="onDeleteArticle()">Borrar</button>
+                </div>
             </article>    <!-- fin del artículo -->
         </div>
     </form><!-- fin formulario-->
+    <div class="">
+        <div class="container">
+            <div class="col-sm-8 col-sm-offset-2">
+                <alert></alert>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
 </div>
