@@ -23,7 +23,8 @@ import { UserComponent } from './main-components/user/user.component';
 
 import { AlertComponent } from './shared/directives/index';
 import { AlertService } from '@services/alerts/index';
-import { LogoutComponent } from './main-components/logout/logout.component';
+import { FileInputAccessorModule } from "file-input-accessor";
+import { LogoutComponent } from "@components/logout/logout.component";
 
 
 
@@ -37,7 +38,7 @@ import { LogoutComponent } from './main-components/logout/logout.component';
     ArticleComponent,
     UserComponent,
     AlertComponent,
-    LogoutComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +48,8 @@ import { LogoutComponent } from './main-components/logout/logout.component';
     FormsModule,
     ReactiveFormsModule,
     QuillModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    FileInputAccessorModule
   ],
   providers: [
     CookieService,

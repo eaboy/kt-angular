@@ -34,11 +34,14 @@
                 <a class="nav-link" routerLink="article">Nuevo artículo</a>
             </li>           
         </ul>
-        <div class="texto-blanco">
+        <div class="texto-blanco" *ngIf="usernameh; else nologin">
             <i class="fa fa-user"></i>Bienvenido, {{usernameh}}
         </div>
         <div class="texto-blanco">
             <a class="nav-link" routerLink="logout" >Desconectar</a>
         </div>        
+        <ng-template #nologin>
+            <div class="texto-blanco">Por favor identifíquese para continuar</div>
+        </ng-template>
     </div>
 </nav>

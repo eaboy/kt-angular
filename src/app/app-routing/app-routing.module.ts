@@ -13,7 +13,7 @@ const appRoutes: Routes = [
 
     {
 		path: '',
-        component: AppComponent,
+        component: ArticlesListComponent,
         canActivate: [AuthService]
     },    
     {

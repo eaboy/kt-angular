@@ -73,8 +73,24 @@
                     <!--Fin Barra lateral del autor -->
                     </div>
                 </div>
-                <button (click)="onSaveArticle()">Guardar</button>
-                <button (click)="onDeleteArticle()">Borrar</button>
+                <div class="row">
+                    <div class="col-md-4">
+                        <span>URL Imagen destacada</span>
+                        <div class="input-group">
+                            <input id="image" name="image" formControlName="image" type="text"  value=""/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <span>URL video</span>
+                        <div class="input-group">
+                            <input id="video" name="video" formControlName="video" type="text"  value=""/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row_buttons">
+                    <button (click)="onSaveArticle()">Guardar</button>
+                    <button (click)="onDeleteArticle()">Borrar</button>
+                </div>
             </article>    <!-- fin del artículo -->
         </div>
     </form><!-- fin formulario-->
