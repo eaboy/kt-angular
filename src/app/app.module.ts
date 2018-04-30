@@ -23,6 +23,7 @@ import { UserComponent } from './main-components/user/user.component';
 
 import { AlertComponent } from './shared/directives/index';
 import { AlertService } from '@services/alerts/index';
+import { FileInputAccessorModule } from "file-input-accessor";
 
 
 
@@ -45,7 +46,8 @@ import { AlertService } from '@services/alerts/index';
     FormsModule,
     ReactiveFormsModule,
     QuillModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    FileInputAccessorModule
   ],
   providers: [
     CookieService,
