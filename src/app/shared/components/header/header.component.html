@@ -9,7 +9,7 @@
 </head>
 <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
     <div class="header__logo">
-        <a class="logo" href="index.html">
+        <a class="logo" href="/">
             <img  src="./assets/icons/logo-codertexts-peq.png" alt="Inicio">
         </a>
     </div> <!-- end header__logo -->
@@ -19,7 +19,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="#"><img></a>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div *ngIf="usernameh" class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
@@ -37,5 +37,8 @@
         <div class="texto-blanco">
             <i class="fa fa-user"></i>Bienvenido, {{usernameh}}
         </div>
+        <div class="texto-blanco">
+            <a class="nav-link" routerLink="logout" >Desconectar</a>
+        </div>        
     </div>
 </nav>

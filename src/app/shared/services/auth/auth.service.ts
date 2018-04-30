@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
+import { CookieService } from "angular2-cookie/services/cookies.service";
 
 @Injectable()
 export class AuthService implements CanActivate {
@@ -8,7 +9,7 @@ export class AuthService implements CanActivate {
   private authSubj = new Subject<boolean>();
   private authenticated: boolean;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private _cookieService:CookieService) {}
 
   canActivate(): boolean {
     if (!this.authenticated)
@@ -18,16 +19,20 @@ export class AuthService implements CanActivate {
   }
 
   getToken(): string {
-    return localStorage.getItem('token');
+    //this._cookieService.put('token', localStorage.getItem('token'));
+    //return localStorage.getItem('token');
+    return this._cookieService.get('token');
   }
 
   setToken(token): void {
-    localStorage.setItem('token', token);
+    this._cookieService.put('token', token);
+    //localStorage.setItem('token', token);
     this.changeAuthStatus(true);
   }
 
   deleteToken(): void {
-    localStorage.removeItem('token');
+    this._cookieService.remove('token');
+    //localStorage.removeItem('token');
     this.changeAuthStatus(false);
   }
 

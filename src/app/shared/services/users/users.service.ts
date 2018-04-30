@@ -18,7 +18,7 @@ export class UsersService {
   private loginPath = `/token-obtain/`;
   private verifyTokenPath = `/token-verify/`;
   private userPath = `/user/`;
-
+  private logoutPath = `/logout/`;
   private tokenData;
 
   constructor(private _communicationService: CommunicationService, private _authService: AuthService, private router: Router) {
@@ -33,14 +33,18 @@ export class UsersService {
         this._authService.setToken(data.token);
         this.extractTokenData();
         return {success: true, message: `Successfully loged in.`};
+      }else if(data.non_field_errors != null){
+        return {success: false, message: data.non_field_errors};
       }
       return data;
     }));
   }
 
-  logoutUser() {
+  logoutUser(): Observable<any> {
     this._authService.deleteToken();
+    let token = this.tokenData;
     this.tokenData = null;
+    return this._communicationService.postData(this.logoutPath, token);
   }
 
   getUser(): Observable<User> {
@@ -80,7 +84,7 @@ export class UsersService {
 
   getUserId() {
     this.extractTokenData();
-    if(this.tokenData !== null){
+    if(this.tokenData !== null && this.tokenData !== undefined){
       return this.tokenData.user_id;
     }
     return false;
@@ -88,7 +92,7 @@ export class UsersService {
 
   getUserName() {
     this.extractTokenData();
-    if(this.tokenData !== null){
+    if(this.tokenData !== null && this.tokenData !== undefined){
       return this.tokenData.username;
     }
     return false;

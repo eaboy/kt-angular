@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   usernameh:string;
 
   ngOnInit() {
+    console.log('paso a cargar cabecera');
     this.usernameh=this._usersservice.getUserName();
   }
 

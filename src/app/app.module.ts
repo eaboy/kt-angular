@@ -23,6 +23,7 @@ import { UserComponent } from './main-components/user/user.component';
 
 import { AlertComponent } from './shared/directives/index';
 import { AlertService } from '@services/alerts/index';
+import { LogoutComponent } from './main-components/logout/logout.component';
 
 
 
@@ -36,6 +37,7 @@ import { AlertService } from '@services/alerts/index';
     ArticleComponent,
     UserComponent,
     AlertComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
