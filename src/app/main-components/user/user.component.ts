@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommunicationService } from '../../shared/services/communication/communication.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import * as decode from 'jwt-decode';
+import { UsersService } from '@services/users/users.service';
+import { Observable } from 'rxjs/Observable';
+import { User } from '../../interfaces/users';
 
 @Component({
   selector: 'app-user',
@@ -12,11 +14,17 @@ import * as decode from 'jwt-decode';
 export class UserComponent implements OnInit {
 
   formulario: FormGroup;
-  constructor(private _formBuilder: FormBuilder) { 
+  userid: number;
+
+
+  constructor(private _formBuilder: FormBuilder,
+    private _usersservice: UsersService) {
     this.createForm();
   }
 
   ngOnInit() {
+    this.userid = this._usersservice.getUserId();
+    this.addInformation();
   }
 
   private createForm(): void {
@@ -35,5 +43,21 @@ export class UserComponent implements OnInit {
 
   modifyUser(): void {
     console.log(this.formulario.value);
+  }
+
+  addInformation(): void {
+    this._usersservice.getUser().subscribe(data => {
+      this.formulario.setValue({
+        username: data[0].username,
+        first_name: 'Luis',
+        last_name: 'Barriga',
+        email: 'barbaclu@gmail.com',
+        image: 'luis',
+        instagram: 'luis',
+        twitter: 'luis',
+        facebook: 'luis',
+        about_me: 'luis',
+      });
+    });
   }
 }

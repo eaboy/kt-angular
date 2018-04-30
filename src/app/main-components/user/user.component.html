@@ -1,43 +1,45 @@
-<form 
-[formGroup]="formulario"
-(ngSubmit)="modifyUser()">
-  <div>
-    <label for="">Usuario</label>
-    <input type="text" formControlName="username">
-  </div>
-  <div>
-    <label for="">Nombre</label>
-    <input type="text" formControlName="first_name">
-  </div>
-  <div>
-    <label for="">Apellidos</label>
-    <input type="text" formControlName="last_name">
-  </div>
-  <div>
-    <label for="">Email</label>
-    <input type="text" formControlName="email">
-  </div>
-  <div>
-    <label for="">Foto</label>
-    <input type="text" formControlName="image">
-  </div>
-  <div>
-    <label for="">Instagram</label>
-    <input type="text" formControlName="instagram">
-  </div>
-  <div>
-    <label for="">Twitter</label>
-    <input type="text" formControlName="twitter">
-  </div>
-  <div>
-    <label for="">Facebook</label>
-    <input type="text" formControlName="facebook">
-  </div>
-  <div>
-    <label for="">Sobre me</label>
-    <input type="text" formControlName="about_me">
-  </div>
-  <div>
-    <button type="submit">Guardar</button>
-  </div>
-</form>
+<div class="container">
+  <form name="formulario" id="formulario" [formGroup]="formulario" (ngSubmit)="modifyUser()">
+    <div class="row">
+      <div class="col-md-6">
+        <label for="">Usuario</label>
+        <input type="text" formControlName="username">
+      </div>
+      <div class="col-md-6">
+        <label for="">Nombre</label>
+        <input type="text" formControlName="first_name">
+      </div>
+      <div class="col-md-6">
+        <label for="">Apellidos</label>
+        <input type="text" formControlName="last_name">
+      </div>
+      <div class="col-md-6">
+        <label for="">Email</label>
+        <input type="text" formControlName="email">
+      </div>
+      <div class="col-md-6">
+        <label for="">Foto</label>
+        <input type="text" formControlName="image">
+      </div>
+      <div class="col-md-6">
+        <label for="">Instagram</label>
+        <input type="text" formControlName="instagram">
+      </div>
+      <div class="col-md-6">
+        <label for="">Twitter</label>
+        <input type="text" formControlName="twitter">
+      </div>
+      <div class="col-md-6">
+        <label for="">Facebook</label>
+        <input type="text" formControlName="facebook">
+      </div>
+      <div class="col-md-6">
+        <label for="">Sobre me</label>
+        <input type="text" formControlName="about_me">
+      </div>      
+    </div>
+    <div>
+      <button type="submit">Guardar</button>
+    </div>
+  </form>
+</div>
