@@ -1,0 +1,34 @@
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-4">&nbsp;</div>
+            <div class="col-md-4">
+                <h3 class="entry__title">Login de usuario</h3>
+                <div *ngIf="displayError" class="row error">
+                    {{displayError}}
+                </div>
+                <form [formGroup]="formulario" (ngSubmit)="loginUser()">
+                    <fieldset>
+                        <div class="form-field">
+                            <label for="username">Usuario:</label>
+                            <input formControlName="username" type="text" class="full-width" value="">
+                        </div>
+                        <div *ngIf="!verPassword" class="form-field">
+                            <label for="username">Password:</label>
+                            <input formControlName="password" type="password" class="full-width" value="">
+                            <span (click)="viewPassword()"  class="fa fa-2x fa-fw fa-eye field-icon 2x"></span>
+                        </div>
+                        <div *ngIf="verPassword" class="form-field">
+                                <label for="username">Password:</label>
+                                <input formControlName="password" type="text" class="full-width" value="">
+                                <span (click)="viewPassword()" class="fa fa-2x fa-fw fa-eye-slash field-icon 2x"></span>
+                            </div>                        
+                        <div class="etiqueta">
+                            <a href="#">¿Olvidaste tu contraseña?</a>
+                        </div>
+                        <button type="submit" class="submit btn--primary btn--large full-width">Entrar</button>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="col-md-4">&nbsp;</div>
+        </div>
+    </div>

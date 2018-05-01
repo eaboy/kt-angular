@@ -1,0 +1,23 @@
+<h1>Listado de artículos</h1>
+<div class="">
+  <div class="container">
+      <div class="col-sm-8 col-sm-offset-2">
+          <alert></alert>
+          <router-outlet></router-outlet>
+      </div>
+  </div>
+</div>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th><th>Imagen</th><th>Titulo</th><th>Autor</th><th>Fechas de publicación</th><th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let article of articles$ | async">
+        <td>{{ article.id }}</td><td><img src="{{ article.image }}" alt="Imagen" width="300 px"></td><td>{{ article.title }}</td><td>{{ article.id_user }}</td><td>{{ article.pub_date }}</td><td><a routerLink="../article/{{ article.id }}"><i class="fa fa-edit"></i></a><a (click)="onDeleteArticle(article.id)"><i class="fa fa-trash"></i></a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
