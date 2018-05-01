@@ -47,10 +47,9 @@ export class UsersService {
 
   logoutUser(): Observable<any> {
     this._authService.deleteToken();
-    let token = this.tokenData;
     this.tokenData = null;
     this.estaLogueado.emit(false);
-    return this._communicationService.postData(this.logoutPath, token);
+    return this._communicationService.getData(this.logoutPath);
   }
 
   getUser(): Observable<User> {
