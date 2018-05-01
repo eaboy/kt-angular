@@ -21,7 +21,7 @@ import { AlertService } from '@services/alerts/index';
 })
 
 export class ArticleComponent implements OnInit {
-  private articleForm: FormGroup;
+  articleForm: FormGroup;
   constructor(private _commumicationservice: CommunicationService,
               private _articlesservice: ArticlesService,
               private _activatedRoute: ActivatedRoute,
