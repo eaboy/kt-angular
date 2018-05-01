@@ -1,25 +1,27 @@
-    <h1>Login de usuario</h1>
     <div class="container">
-        <div *ngIf="displayError" class="row error">
-            {{displayError}}
-        </div>
         <div class="row ">
             <div class="col-md-4">&nbsp;</div>
-            <div class="col-md-4 text-center">
-
+            <div class="col-md-4">
+                <h3 class="entry__title">Login de usuario</h3>
+                <div *ngIf="displayError" class="row error">
+                    {{displayError}}
+                </div>
                 <form [formGroup]="formulario" (ngSubmit)="loginUser()">
                     <fieldset>
                         <div class="form-field">
-                            <input formControlName="username" type="text" class="full-width" placeholder="Tu usuario"
-                                   value="">
+                            <label for="username">Usuario:</label>
+                            <input formControlName="username" type="text" class="full-width" value="">
                         </div>
-                        <div class="form-field">
-                            <input formControlName="password" type="password" class="full-width" placeholder="Tu contraseña" value="">
-                            <span toggle="#password" class="fa fa-2x fa-fw fa-eye field-icon toggle-password 2x"></span>
+                        <div *ngIf="!verPassword" class="form-field">
+                            <label for="username">Password:</label>
+                            <input formControlName="password" type="password" class="full-width" value="">
+                            <span (click)="viewPassword()"  class="fa fa-2x fa-fw fa-eye field-icon 2x"></span>
                         </div>
-                        <div class="etiqueta">
-                            <label class="etiqueta"><input type="checkbox" value="remember-me" id="recuerdame">&nbsp;Recuérdame</label>
-                        </div>
+                        <div *ngIf="verPassword" class="form-field">
+                                <label for="username">Password:</label>
+                                <input formControlName="password" type="text" class="full-width" value="">
+                                <span (click)="viewPassword()" class="fa fa-2x fa-fw fa-eye-slash field-icon 2x"></span>
+                            </div>                        
                         <div class="etiqueta">
                             <a href="#">¿Olvidaste tu contraseña?</a>
                         </div>

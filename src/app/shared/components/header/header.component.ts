@@ -8,12 +8,19 @@ import { UsersService } from '@services/users/users.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private _usersservice: UsersService) { }
-  
   usernameh:string;
 
+  constructor(private _usersservice: UsersService) { 
+    _usersservice.estaLogueado.subscribe(log =>{
+        if(log){
+          this.usernameh=this._usersservice.getUserName();
+        }else{
+          this.usernameh = null;
+        }
+    });
+  }
+  
   ngOnInit() {
-    console.log('paso a cargar cabecera');
     this.usernameh=this._usersservice.getUserName();
   }
 

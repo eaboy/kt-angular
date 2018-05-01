@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { CommunicationService } from '@services/communication/communication.service';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { AuthService } from '@services/auth/auth.service';
 import * as jwt_decode from "jwt-decode";
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
+
 
 /* Servicio encargado de gestionar la comunicación con el API relativa al modelo users.
    Consume el servicio de comunicaciones y provee de métodos a los componentes para gestionar las acciones 
@@ -20,6 +21,8 @@ export class UsersService {
   private userPath = `/user/`;
   private logoutPath = `/logout/`;
   private tokenData;
+  @Output() estaLogueado: EventEmitter<boolean> = new EventEmitter();
+
 
   constructor(private _communicationService: CommunicationService, private _authService: AuthService, private router: Router) {
     if(this._authService.getToken()) {
@@ -32,8 +35,10 @@ export class UsersService {
       if(data.token) {
         this._authService.setToken(data.token);
         this.extractTokenData();
+        this.estaLogueado.emit(true);
         return {success: true, message: `Successfully loged in.`};
       }else if(data.non_field_errors != null){
+        this.estaLogueado.emit(false);
         return {success: false, message: data.non_field_errors};
       }
       return data;
@@ -44,6 +49,7 @@ export class UsersService {
     this._authService.deleteToken();
     let token = this.tokenData;
     this.tokenData = null;
+    this.estaLogueado.emit(false);
     return this._communicationService.postData(this.logoutPath, token);
   }
 
@@ -65,8 +71,10 @@ export class UsersService {
     };
     this._communicationService.postData(this.verifyTokenPath, token).subscribe(data => {
       if(data.token){
+        this.estaLogueado.emit(true);
         this._authService.changeAuthStatus(true);
       } else {
+        this.estaLogueado.emit(false);
         this._authService.changeAuthStatus(false);
         this.router.navigate(['login']);
       }
