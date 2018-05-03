@@ -11,10 +11,10 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  public login: Login;
+  login: Login;
   formulario: FormGroup;
-  public displayError: String = null;
-  private verPassword: boolean = false;
+  displayError: String = null;
+  verPassword: boolean = false;
 
   constructor( private _userService: UsersService, private _formBuilder: FormBuilder, private router: Router) { }
 
