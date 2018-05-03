@@ -26,6 +26,9 @@ import { AlertService } from '@services/alerts/index';
 import { FileInputAccessorModule } from "file-input-accessor";
 import { LogoutComponent } from "@components/logout/logout.component";
 import { ResetPasswordComponent } from "@components/reset-password/reset-password.component";
+import { ImageUploadComponent } from "@components/images-uploader/image-upload.component";
+import { ImageService } from "@components/images-uploader/image.service";
+import { FileDropDirective } from "@components/images-uploader/file-drop.directive";
 
 
 
@@ -40,7 +43,9 @@ import { ResetPasswordComponent } from "@components/reset-password/reset-passwor
     UserComponent,
     AlertComponent,
     LogoutComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ImageUploadComponent,
+    FileDropDirective
   ],
   imports: [
     BrowserModule,
@@ -59,7 +64,8 @@ import { ResetPasswordComponent } from "@components/reset-password/reset-passwor
     AuthService,
     UsersService,
     ArticlesService,
-    AlertService
+    AlertService,
+    ImageService
   ],
   bootstrap: [AppComponent]
 })
