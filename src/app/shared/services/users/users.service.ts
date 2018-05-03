@@ -21,6 +21,8 @@ export class UsersService {
   private userPath = `/user/`;
   private logoutPath = `/logout/`;
   private recuperarPasswordPath = '/recuperarPassword/'
+  private enviarEmailPath = '/sendEmailPassword/'
+  
   private tokenData;
   @Output() estaLogueado: EventEmitter<boolean> = new EventEmitter();
 
@@ -107,7 +109,6 @@ export class UsersService {
   }
 
 
-
   buscarUsuario(login: Login): Observable<any> {
     return this._communicationService.postData(this.recuperarPasswordPath, login).pipe(map(data => {
       if(data.token) {
@@ -115,6 +116,13 @@ export class UsersService {
       }
       return data;
     }));
+  }
+
+  enviarEmailPassword(email: string): Observable<any> {
+    return this._communicationService.getData(this.enviarEmailPath+'?email='+email).pipe(map(data => {
+      return data;
+    }));
+    
   }
 
 }
