@@ -20,6 +20,7 @@ export class UsersService {
   private verifyTokenPath = `/token-verify/`;
   private userPath = `/user/`;
   private logoutPath = `/logout/`;
+  private recuperarPasswordPath = '/recuperarPassword/'
   private tokenData;
   @Output() estaLogueado: EventEmitter<boolean> = new EventEmitter();
 
@@ -44,7 +45,7 @@ export class UsersService {
       return data;
     }));
   }
-
+  
   logoutUser(): Observable<any> {
     this._authService.deleteToken();
     this.tokenData = null;
@@ -103,6 +104,17 @@ export class UsersService {
       return this.tokenData.username;
     }
     return false;
+  }
+
+
+
+  buscarUsuario(login: Login): Observable<any> {
+    return this._communicationService.postData(this.recuperarPasswordPath, login).pipe(map(data => {
+      if(data.token) {
+          console.log(data);
+      }
+      return data;
+    }));
   }
 
 }

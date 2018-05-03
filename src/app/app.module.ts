@@ -25,6 +25,7 @@ import { AlertComponent } from './shared/directives/index';
 import { AlertService } from '@services/alerts/index';
 import { FileInputAccessorModule } from "file-input-accessor";
 import { LogoutComponent } from "@components/logout/logout.component";
+import { ResetPasswordComponent } from "@components/reset-password/reset-password.component";
 
 
 
@@ -38,7 +39,8 @@ import { LogoutComponent } from "@components/logout/logout.component";
     ArticleComponent,
     UserComponent,
     AlertComponent,
-    LogoutComponent
+    LogoutComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
