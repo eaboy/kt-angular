@@ -116,7 +116,6 @@ export class ImageUploadComponent implements OnInit, OnChanges {
 
   private processUploadedFiles() {
     this.files = [];
-    console.log('aaaaa');
     for (let i = 0; i < this.uploadedFiles.length; i++) {
       let data: any = this.uploadedFiles[i];
       let fileBlob: Blob,
