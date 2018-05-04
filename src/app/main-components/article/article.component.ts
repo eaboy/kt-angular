@@ -48,8 +48,8 @@ export class ArticleComponent implements OnInit {
       'pub_date': new FormControl('',Validators.required),
       'slug':new FormControl(),
       'status':new FormControl('',Validators.required),
-      'image':new FormControl('',[Validators.required,CustomValidators.validateUrl]),
-      'video':new FormControl('',[Validators.required,CustomValidators.validateUrl]),
+      'image':new FormControl('',[Validators.required]),
+      'video':new FormControl('',[Validators.required]),
     });
     this.listcategories$= this._articlesservice.listCategories();
     this.title_post ='Nueva Entrada';
