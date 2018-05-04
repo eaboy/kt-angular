@@ -29,6 +29,7 @@ import { ResetPasswordComponent } from "@components/reset-password/reset-passwor
 import { ImageUploadComponent } from "@components/images-uploader/image-upload.component";
 import { ImageService } from "@components/images-uploader/image.service";
 import { FileDropDirective } from "@components/images-uploader/file-drop.directive";
+import { FieldErrorDisplayComponent } from '@components/field-error-display/field-error-display.component';
 
 
 
@@ -45,7 +46,9 @@ import { FileDropDirective } from "@components/images-uploader/file-drop.directi
     LogoutComponent,
     ResetPasswordComponent,
     ImageUploadComponent,
-    FileDropDirective
+    FileDropDirective,
+    FieldErrorDisplayComponent,
+
   ],
   imports: [
     BrowserModule,

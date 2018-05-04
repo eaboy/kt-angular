@@ -4,13 +4,14 @@ import { ArticlesService } from '../../shared/services/articles/articles.service
 import { Article } from '../../interfaces/articles';
 import { Category } from '../../interfaces/category';
 import * as moment from 'moment';
-import { FormGroup, FormControl, FormArray, NgForm, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, NgForm, FormBuilder, Validators } from '@angular/forms';
 import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Location } from '@angular/common';
 import { UsersService } from '@services/users/users.service';
 import { AlertService } from '@services/alerts/index';
+import { CustomValidators } from '@services/validations/custom-validation.service';
 
 
 @Component({
@@ -40,15 +41,15 @@ export class ArticleComponent implements OnInit {
   ngOnInit() {
     this.articleForm = new FormGroup({
       'idpost': new FormControl(),
-      'title': new FormControl(),
+      'title': new FormControl('',Validators.required),
       'id_user': new FormControl(),
-      'text': new FormControl(),
-      'categories': new FormControl(),
-      'pub_date': new FormControl(),
+      'text': new FormControl('',Validators.required),
+      'categories': new FormControl('',Validators.required),
+      'pub_date': new FormControl('',Validators.required),
       'slug':new FormControl(),
-      'status':new FormControl(),
-      'image':new FormControl(),
-      'video':new FormControl(),
+      'status':new FormControl('',Validators.required),
+      'image':new FormControl('',[Validators.required,CustomValidators.validateUrl]),
+      'video':new FormControl('',[Validators.required,CustomValidators.validateUrl]),
     });
     this.listcategories$= this._articlesservice.listCategories();
     this.title_post ='Nueva Entrada';
@@ -83,40 +84,65 @@ export class ArticleComponent implements OnInit {
     }
   }
 
-  onSaveArticle(){
-    const article: Article={
-      id_article:this.articleForm.value.idpost,
-      title:this.articleForm.value.title,
-      id_user:this._usersservice.getUserId(),
-      text:this.articleForm.value.text,
-      categories:this.articleForm.value.categories,
-      pub_date: moment(this.articleForm.value.pub_date).format('YYYY-MM-DD'),
-      slug: this.buildslug(this.articleForm.value.title),
-      status: this.articleForm.value.status,
-      image: this.articleForm.value.image,
-      video: this.articleForm.value.video,
+  isFieldValid(field: string) {
+    return !this.articleForm.get(field).valid && this.articleForm.get(field).touched;
+  }
+  
+  displayFieldCss(field: string) {
+    return {
+      'has-error': this.isFieldValid(field),
+      'has-feedback': this.isFieldValid(field)
     };
-    
-    if(this.articleForm.value.idpost){
-      this._articlesservice.editArticle(this.articleForm.value.idpost, article).subscribe(data =>{
-        if(data.id){
-          this._alerservice.success("Datos Guardados");
-        }else{
-          this._alerservice.error("Error. Datos no guardados");
-        }
-      });
+  }
+
+  onSaveArticle(){
+    if (this.articleForm.valid) {
+      const article: Article={
+        id_article:this.articleForm.value.idpost,
+        title:this.articleForm.value.title,
+        id_user:this._usersservice.getUserId(),
+        text:this.articleForm.value.text,
+        categories:this.articleForm.value.categories,
+        pub_date: moment(this.articleForm.value.pub_date).format('YYYY-MM-DD'),
+        slug: this.buildslug(this.articleForm.value.title),
+        status: this.articleForm.value.status,
+        image: this.articleForm.value.image,
+        video: this.articleForm.value.video,
+      };
+      
+      if(this.articleForm.value.idpost){
+        this._articlesservice.editArticle(this.articleForm.value.idpost, article).subscribe(data =>{
+          if(data.id){
+            this._alerservice.success("Datos Guardados");
+          }else{
+            this._alerservice.error("Error. Datos no guardados");
+          }
+        });
+      }else{
+        this._articlesservice.createArticle(article).subscribe(data =>{
+          if(data.id){
+            alert("Entrada creada correctamente")
+            var url=`${'/article/'+data.id}`;
+            location.assign(url);
+          }else{
+            alert("Error. Entrada no creada")
+          }
+        });
+      }
     }else{
-      this._articlesservice.createArticle(article).subscribe(data =>{
-        if(data.id){
-          alert("Entrada creada correctamente")
-          var url=`${'/article/'+data.id}`;
-          location.assign(url);
-        }else{
-          alert("Error. Entrada no creada")
-        }
-      });
+      this.validateAllFormFields(this.articleForm);
     }
-   
+  }
+
+  validateAllFormFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(field => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        this.validateAllFormFields(control);
+      }
+    });
   }
 
   onDeleteArticle(){

@@ -4,7 +4,7 @@ textarea{
     width: 100%;
     border: 1px solid #ccc;
 }
-select#category,select#status{
+select#categories,select#status{
     width: 100%;
     padding: 5px;
     max-height: 100px
@@ -38,4 +38,17 @@ input[type="text"]{
 }
 .row_buttons{
     margin-top:20px
+}
+.control-label.required:after { 
+    color: #d00;
+    content: "*";
+    margin-left: 5px;
+    top:7px;
+  }
+  .has-error .form-control{
+    border:2px solid #f76360;
+  }
+
+  quill-editor.form-control, select.form-control{
+    background: transparent
 }

@@ -10,42 +10,55 @@
     <form name="formulario" id="formulario" method="post" action="" [formGroup]="articleForm">
         
         <div class="row">
-            <article class="col-md-12 form-group">
+            <article class="col-md-12">
                 <div class="form-field">
                     <input name="idpost" formControlName="idpost" type="hidden" [ngModel]="postId"/>
                 </div>
-                <div class="form-field">
-                    <input name="title" formControlName="title" type="text" id="title" class="full-width" placeholder="Título" value="">
+                <div class="form-group" [ngClass]="displayFieldCss('title')">
+                    <label for="title" class="control-label required">Título</label>
+                    <input name="title" formControlName="title" type="text" id="title" class="form-control" placeholder="Título" value="">
+                    <app-field-error-display [displayError]="isFieldValid('title')" errorMsg="Por favor escriba el titulo"></app-field-error-display>
                 </div>
+
                 
                 <div class="row">
                     <div class="col-md-4">
-                        <span>Fecha de publicación</span>
-                        <div class="input-group">
-                            <input id="fecha" name="pub_date" formControlName="pub_date" type="text" #dp="bsDatepicker" bsDatepicker [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'}" placeholder="Fecha publicación" class="form-control" value="">
-                            <span class="input-group-addon btn btn-success" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen"><i class="fa fa-calendar"></i></span>
+                        <div class="form-group" [ngClass]="displayFieldCss('pub_date')">
+                            <label for="pub_date" class="control-label required">Fecha de publicación</label>
+                            <div class="input-group">
+                                <input id="fecha" name="pub_date" formControlName="pub_date" type="text" #dp="bsDatepicker" bsDatepicker [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'}" placeholder="Fecha publicación" class="form-control" value="">
+                                <span class="input-group-addon btn btn-success" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen"><i class="fa fa-calendar"></i></span>
+                            </div>
+                            <app-field-error-display [displayError]="isFieldValid('pub_date')" errorMsg="Por favor indique la fecha"></app-field-error-display>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <span>Categorías</span>
-                        <select multiple name="categories" id="category" formControlName="categories" >
-                            <option *ngFor="let category of listcategories$ | async" value={{category.id}} [value]="categories">{{category.name}}</option>
-
-                        </select>
+                        <div class="form-group" [ngClass]="displayFieldCss('categories')">
+                            <label for="categories" class="control-label required">Categorias</label>
+                            <select multiple name="categories" id="categories" formControlName="categories" class="form-control">
+                                <option *ngFor="let category of listcategories$ | async" value={{category.id}} [value]="categories">{{category.name}}</option>
+                            </select>
+                            <app-field-error-display [displayError]="isFieldValid('categories')" errorMsg="Por favor marque al menos una categoria"></app-field-error-display>
+                        </div>
                     </div>
                     <div class="col-md-4">
-                        <span>Estado</span>
-                        <select name="status" id="status" formControlName="status" value="">
-                            <option value="borrador">Borrador</option>
-                            <option value="finalizado">Finalizado</option>
-                        </select>
+                        <div class="form-group" [ngClass]="displayFieldCss('status')">
+                            <label for="status" class="control-label required">Estado</label>
+                            <select name="status" id="status" formControlName="status" value="" class="form-control">
+                                <option value="borrador">Borrador</option>
+                                <option value="finalizado">Finalizado</option>
+                            </select>
+                            <app-field-error-display [displayError]="isFieldValid('status')" errorMsg="Por favor indique el estado"></app-field-error-display>
+                        </div>
                     </div> 
                 </div>
                 
                 <div class="row">
                     <div class="col">
-                        <quill-editor formControlName="text"></quill-editor>
-                       
+                        <div class="form-group" [ngClass]="displayFieldCss('text')">
+                            <quill-editor formControlName="text" class="form-control"></quill-editor>
+                            <app-field-error-display [displayError]="isFieldValid('text')" errorMsg="Escriba el contenido de la publicación"></app-field-error-display>
+                        </div>
                     </div>
                 <!--Barra lateral del autor -->
                     <div class="col-md-2 s-content__author text-center">
@@ -75,15 +88,21 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <span>URL Imagen destacada</span>
-                        <div class="input-group">
-                            <input id="image" name="image" formControlName="image" type="text"  value=""/>
+                        <div class="form-group" [ngClass]="displayFieldCss('image')">
+                            <label for="image" class="control-label required">Url de imagen destacada</label>
+                            <div class="input-group">
+                                <input id="image" name="image" formControlName="image" type="url"  value="" class="form-control"/>
+                            </div>
+                            <app-field-error-display [displayError]="isFieldValid('image')" errorMsg="Escriba la url de la imagen"></app-field-error-display>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <span>URL video</span>
-                        <div class="input-group">
-                            <input id="video" name="video" formControlName="video" type="text"  value=""/>
+                        <div class="form-group" [ngClass]="displayFieldCss('video')">
+                            <label for="video" class="control-label required">Url video</label>
+                            <div class="input-group">
+                                <input id="video" name="video" formControlName="video" type="url"  value="" class="form-control"/>
+                            </div>
+                            <app-field-error-display [displayError]="isFieldValid('video')" errorMsg="Escriba la url del video"></app-field-error-display>
                         </div>
                     </div>
                 </div>
