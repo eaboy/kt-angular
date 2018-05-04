@@ -3,6 +3,7 @@ import { Headers, Http, RequestOptions, RequestOptionsArgs, Response, RequestMet
 import {HttpClient, HttpRequest, HttpEvent} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { environment } from "environments/environment";
+import { User } from "@interfaces/users";
 
 
 
@@ -20,10 +21,6 @@ public postImage(url: string, image: File, hs?: Headers | { [name: string]: any 
 
 
     let headers = new Headers();
-        headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT, OPTIONS');
-        headers.append('Access-Control-Allow-Origin', '*');
-        headers.append('Access-Control-Allow-Headers', "X-Requested-With, Content-Type");
-    //let options = new RequestOptions({ method: RequestMethod.Post, headers: headers, body:JSON.stringify(GroupM),  url:this._GroupsUrl  });    
     let options = new RequestOptions({ method: RequestMethod.Post});   
 
 
@@ -41,11 +38,23 @@ public postImage(url: string, image: File, hs?: Headers | { [name: string]: any 
       formData.append(key, customFormData[key]);
     }
     formData.append(partName, image);
+    console.log(options);
     return this.http.post(environment.apiUrl+url, formData, options);
   }
 
-  getAdjuntos(obj: any): Observable<string[]> {       
-      return this._httpClient.get<string[]>(`${environment.apiUrl}/adjuntosexcursiones/${obj.fecha}/${obj.folleto}/${obj.cuadro}/${obj.codigoDestino}/${obj.clave}`);
+  getAdjuntos(obj: any): Observable<string[]> { 
+      if(typeof obj == 'number'){
+        return this._httpClient.get<string[]>(`${environment.apiUrl}/getAvatar/${obj}`);
+      }else{
+        let id = obj[0].id;
+        return this._httpClient.get<string[]>(`${environment.apiUrl}/getAvatar/${id}`);
+      }
+      
   }
+
+  eliminarAdjunto(id: string): Observable<boolean> {
+    return this._httpClient.get<boolean>(`${environment.apiUrl}/deleteAvatar${id}`); 
+  }
+
 
 }

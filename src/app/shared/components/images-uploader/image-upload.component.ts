@@ -103,7 +103,6 @@ export class ImageUploadComponent implements OnInit, OnChanges {
   private onResponse(response, fileHolder: FileHolder) {
     fileHolder.serverResponse = response;
     fileHolder.pending = false;
-
     this.uploadFinished.emit(fileHolder);
 
     if (--this.pendingFilesCounter == 0) {
@@ -117,6 +116,7 @@ export class ImageUploadComponent implements OnInit, OnChanges {
 
   private processUploadedFiles() {
     this.files = [];
+    console.log('aaaaa');
     for (let i = 0; i < this.uploadedFiles.length; i++) {
       let data: any = this.uploadedFiles[i];
       let fileBlob: Blob,
@@ -155,7 +155,6 @@ export class ImageUploadComponent implements OnInit, OnChanges {
         this.inputElement.nativeElement.value = '';
         continue;
       }
-
       const img = document.createElement('img');
       img.src = window.URL.createObjectURL(beforeUploadResult.file);
 

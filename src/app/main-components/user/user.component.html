@@ -40,13 +40,13 @@
   </form>
   <label>Avatar de usuario:</label>
 <image-upload [max]="1"
- url="/upload"
+ url="/subirAvatar/{{userid}}"
   [uploadedFiles]="listadoAdjuntos"
   [extensions]="['jpg','png','gif']"
   (removed)="onRemoved($event)"
   [buttonCaption]="'Subir Imagen'"
-  [dropBoxMessage]="'Arrastra las imágenes aquí'"
-  [clearButtonCaption]="'Borrar Todo'"
-  [objeto]="excursion"
+  [dropBoxMessage]="'Arrastra tu imagen aquí'"
+  [clearButtonCaption]="'Borrar'"
+  [objeto]="usuarioRecuperado"
   ></image-upload>
 </div>

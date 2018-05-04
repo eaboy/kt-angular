@@ -13,12 +13,13 @@ import { FileHolder } from "@components/images-uploader/image-upload.component";
   styleUrls: ['./user.component.scss'],
   providers: [CommunicationService]
 })
-export class UserComponent implements OnInit, OnChanges {
+export class UserComponent implements OnInit {
 
   formulario: FormGroup;
   userid: number;
   listadoAdjuntos: string[];
   mensajeExito: boolean=false;
+  usuarioRecuperado: User = null;
 
   constructor(private _formBuilder: FormBuilder,
     private _usersservice: UsersService,
@@ -28,13 +29,9 @@ export class UserComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.userid = this._usersservice.getUserId();
-    this.addInformation();
+    this.recuperarInformacion();
   }
 
-  ngOnChanges(){
-      this.mensajeExito = false;
-      this.createForm();
-  }
     
 
   private createForm(): void {
@@ -54,8 +51,9 @@ export class UserComponent implements OnInit, OnChanges {
     console.log(this.formulario.value);
   }
 
-  addInformation(): void {
+  recuperarInformacion(): void {
     this._usersservice.getUser().subscribe(data => {
+      this.usuarioRecuperado = data;
       this.formulario.setValue({
         username: data[0].username,
         first_name: data[0].first_name,
@@ -66,6 +64,20 @@ export class UserComponent implements OnInit, OnChanges {
         facebook: data[0].facebook || '',
         about_me: data[0].about_me || '',
       });
+      this.getAdjuntos(); 
     });
   }
+
+  getAdjuntos(): void {
+   this._imagesService.getAdjuntos(this.userid).subscribe(data=>{     
+        this.listadoAdjuntos = data;
+      });
+  }
+
+  onRemoved(file: FileHolder): void{
+    console.log(file.src);
+    this._imagesService.eliminarAdjunto(file.src).subscribe(data=>{});
+  }
+
+
 }
