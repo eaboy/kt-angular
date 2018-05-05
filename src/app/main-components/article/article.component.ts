@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { CommunicationService } from '../../shared/services/communication/communication.service';
 import { ArticlesService } from '../../shared/services/articles/articles.service';
 import { Article } from '../../interfaces/articles';
@@ -10,8 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Location } from '@angular/common';
 import { UsersService } from '@services/users/users.service';
-import { AlertService } from '@services/alerts/index';
 import { CustomValidators } from '@services/validations/custom-validation.service';
+import { LoaderViewChildComponent } from '../../shared/popup-window/loader/loader-viewchild.component';
 
 
 @Component({
@@ -21,14 +21,19 @@ import { CustomValidators } from '@services/validations/custom-validation.servic
   providers:[CommunicationService]
 })
 
+
 export class ArticleComponent implements OnInit {
+
+  @ViewChild(LoaderViewChildComponent)
+  popup : LoaderViewChildComponent;
+
+
   articleForm: FormGroup;
   constructor(private _commumicationservice: CommunicationService,
               private _articlesservice: ArticlesService,
               private _activatedRoute: ActivatedRoute,
               private location: Location,
-              private _usersservice: UsersService,
-              private _alerservice: AlertService) { }
+              private _usersservice: UsersService) { }
 
   postId: Article;
   postData$: Observable<Article[]>;
@@ -95,6 +100,7 @@ export class ArticleComponent implements OnInit {
     };
   }
 
+
   onSaveArticle(){
     if (this.articleForm.valid) {
       const article: Article={
@@ -113,19 +119,23 @@ export class ArticleComponent implements OnInit {
       if(this.articleForm.value.idpost){
         this._articlesservice.editArticle(this.articleForm.value.idpost, article).subscribe(data =>{
           if(data.id){
-            this._alerservice.success("Datos Guardados");
+            this.popup.showPopup("Información");
+            this.popup.texto="Datos guardados correctamente";
           }else{
-            this._alerservice.error("Error. Datos no guardados");
+            this.popup.showPopup("ERROR");
+            this.popup.texto="Los datos no se han guardado";
           }
         });
       }else{
         this._articlesservice.createArticle(article).subscribe(data =>{
           if(data.id){
-            alert("Entrada creada correctamente")
+            this.popup.showPopup("Información");
+            this.popup.texto="Articulo creado correctaemnte";
             var url=`${'/article/'+data.id}`;
             location.assign(url);
           }else{
-            alert("Error. Entrada no creada")
+            this.popup.showPopup("ERROR");
+            this.popup.texto="Articulo no creado";
           }
         });
       }
@@ -148,9 +158,12 @@ export class ArticleComponent implements OnInit {
   onDeleteArticle(){
     this._articlesservice.deleteArticle(this.postId).subscribe(data =>{
       if(!data){
-        this._alerservice.success(`${"Articulo con id "+this.postId+" borrado correctamente"}`);
+        this.popup.showPopup("Información");
+        this.popup.texto=`${"Articulo con id "+this.postId+" borrado correctamente"}`;
+        //location.assign('/');
       }else{
-        this._alerservice.error("Error. Articulo no borrado");
+        this.popup.showPopup("ERROR");
+        this.popup.texto="Error. Articulo no borrado";
       }
     });
   }

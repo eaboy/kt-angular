@@ -19,6 +19,7 @@ import { FooterComponent } from '@components/footer/footer.component';
 import { ArticleComponent } from './main-components/article/article.component';
 import { QuillModule } from 'ngx-quill';
 import { BsDatepickerModule } from 'ngx-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserComponent } from './main-components/user/user.component';
 
 import { AlertComponent } from './shared/directives/index';
@@ -31,6 +32,9 @@ import { ImageService } from "@components/images-uploader/image.service";
 import { FileDropDirective } from "@components/images-uploader/file-drop.directive";
 import { FieldErrorDisplayComponent } from '@components/field-error-display/field-error-display.component';
 
+import { PopupWindowComponent } from './shared/popup-window/popup-window.component';
+import { LoaderComponent } from './shared/popup-window/loader/loader.component';
+import { LoaderViewChildComponent } from "./shared/popup-window/loader/loader-viewchild.component";
 
 
 @NgModule({
@@ -48,6 +52,9 @@ import { FieldErrorDisplayComponent } from '@components/field-error-display/fiel
     ImageUploadComponent,
     FileDropDirective,
     FieldErrorDisplayComponent,
+    PopupWindowComponent,
+    LoaderComponent,
+    LoaderViewChildComponent
 
   ],
   imports: [
@@ -59,7 +66,8 @@ import { FieldErrorDisplayComponent } from '@components/field-error-display/fiel
     ReactiveFormsModule,
     QuillModule,
     BsDatepickerModule.forRoot(),
-    FileInputAccessorModule
+    FileInputAccessorModule,
+    NgbModule.forRoot(),
   ],
   providers: [
     CookieService,
@@ -68,9 +76,11 @@ import { FieldErrorDisplayComponent } from '@components/field-error-display/fiel
     UsersService,
     ArticlesService,
     AlertService,
-    ImageService
+    ImageService,
+    LoaderViewChildComponent,
+    PopupWindowComponent
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 
 

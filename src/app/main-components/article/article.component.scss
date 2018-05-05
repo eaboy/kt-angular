@@ -52,3 +52,6 @@ input[type="text"]{
   quill-editor.form-control, select.form-control{
     background: transparent
 }
+.input-group .form-control{
+    z-index: 0;
+}
