@@ -59,8 +59,8 @@ export class UsersService {
     return this._communicationService.getData(this.userPath);
   }
 
-  updateUser(userId: number, user: User): Observable<any> {
-    return this._communicationService.editData(`/updateuser/ ${userId}`, user);
+  updateUser(userId, user: User): Observable<any> {
+    return this._communicationService.editData(`/updateUser/` + userId, user);
   }
 
   isAuthenticated(): Subject<boolean> {

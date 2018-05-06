@@ -1,11 +1,14 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, ViewChild } from '@angular/core';
 import { CommunicationService } from '../../shared/services/communication/communication.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { UsersService } from '@services/users/users.service';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../../interfaces/users';
-import { ImageService } from "@components/images-uploader/image.service";
-import { FileHolder } from "@components/images-uploader/image-upload.component";
+import { ImageService } from '@components/images-uploader/image.service';
+import { FileHolder } from '@components/images-uploader/image-upload.component';
+import { LoaderViewChildComponent } from '../../shared/popup-window/loader/loader-viewchild.component';
+import { ModalDeleteComponent } from '../../shared/popup-window/loader/modal-delete.component';
+
 
 @Component({
   selector: 'app-user',
@@ -15,10 +18,14 @@ import { FileHolder } from "@components/images-uploader/image-upload.component";
 })
 export class UserComponent implements OnInit {
 
+  @ViewChild(LoaderViewChildComponent)
+  popup: LoaderViewChildComponent;
+
+
   formulario: FormGroup;
   userid: number;
   listadoAdjuntos: string[];
-  mensajeExito: boolean=false;
+  mensajeExito: boolean = false;
   usuarioRecuperado: User = null;
 
   constructor(private _formBuilder: FormBuilder,
@@ -32,7 +39,6 @@ export class UserComponent implements OnInit {
     this.recuperarInformacion();
   }
 
-    
 
   private createForm(): void {
     this.formulario = this._formBuilder.group({
@@ -48,7 +54,28 @@ export class UserComponent implements OnInit {
   }
 
   modifyUser(): void {
-    console.log(this.formulario.value);
+
+    if (this.formulario.valid) {
+      const user: User = {
+        username: this.formulario.value.username,
+        first_name: this.formulario.value.first_name,
+        last_name: this.formulario.value.last_name,
+        email: this.formulario.value.email,
+        password: 'moebius2',
+      };
+
+      this._usersservice.updateUser(this.userid, user).subscribe(data => {
+          if (data.id) {
+            //this.popup.showPopup('Información');
+            //this.popup.texto = 'Datos guardados correctamente';
+            console.log('Datos guardados correctamente');
+          } else {
+            //this.popup.showPopup('ERROR');
+            //this.popup.texto = 'Los datos no se han guardado';
+            console.log('Los datos no se han guardado');
+          }
+        });
+    }
   }
 
   recuperarInformacion(): void {

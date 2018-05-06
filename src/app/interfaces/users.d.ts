@@ -1,7 +1,11 @@
 
 export declare interface User {
-    id_user?: number,
+    username: string,
+    first_name: string,
+    last_name: string,
     email: string,
+    password: string,
+    id_user?: number,
     image?: string,
     instagram_user?: string,
     twitter_user?: string,
