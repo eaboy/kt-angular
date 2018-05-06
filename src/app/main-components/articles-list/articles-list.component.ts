@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Article } from '../../interfaces/articles';
 import { ArticlesService } from '../../shared/services/articles/articles.service';
 import { Observable } from 'rxjs/Observable';
 import { UsersService } from '@services/users/users.service';
 import { ActivatedRoute } from '@angular/router';
 import { AlertService } from '@services/alerts/index';
+import { LoaderViewChildComponent } from '../../shared/popup-window/loader/loader-viewchild.component';
+import { ModalDeleteComponent } from '../../shared/popup-window/loader/modal-delete.component';
 
 @Component({
   selector: 'app-articles-list',
@@ -13,6 +15,9 @@ import { AlertService } from '@services/alerts/index';
 })
 
 export class ArticlesListComponent implements OnInit {
+  @ViewChild(ModalDeleteComponent)
+  popup : ModalDeleteComponent;
+
   articles$: Observable<Article[]>;
 
   constructor(private _articlesService: ArticlesService,
@@ -34,11 +39,13 @@ export class ArticlesListComponent implements OnInit {
   onDeleteArticle(id){
     this._articlesService.deleteArticle(id).subscribe(data =>{
       if(!data){
-        this._alerservice.success(`${"Articulo con id "+id+" borrado correctamente"}`);
-        alert(`${"Articulo con id "+id+" borrado correctamente"}`);
+        this.popup.popupOpen("Información");
+        this.popup.texto=`${"Articulo con id "+id+" borrado correctamente"}`;
+        //this._alerservice.success(`${"Articulo con id "+id+" borrado correctamente"}`);
+        //alert(`${"Articulo con id "+id+" borrado correctamente"}`);
       }else{
-        this._alerservice.error("Error. Articulo no borrado");
-        alert("Error. Articulo no borrado");
+        this.popup.popupOpen("ERROR");
+        this.popup.texto="Error. Articulo no borrado";
       }
     });
   }

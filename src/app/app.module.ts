@@ -33,7 +33,7 @@ import { FileDropDirective } from "@components/images-uploader/file-drop.directi
 import { FieldErrorDisplayComponent } from '@components/field-error-display/field-error-display.component';
 
 import { PopupWindowComponent } from './shared/popup-window/popup-window.component';
-import { LoaderComponent } from './shared/popup-window/loader/loader.component';
+import { ModalDeleteComponent } from './shared/popup-window/loader/modal-delete.component';
 import { LoaderViewChildComponent } from "./shared/popup-window/loader/loader-viewchild.component";
 
 
@@ -53,7 +53,7 @@ import { LoaderViewChildComponent } from "./shared/popup-window/loader/loader-vi
     FileDropDirective,
     FieldErrorDisplayComponent,
     PopupWindowComponent,
-    LoaderComponent,
+    ModalDeleteComponent,
     LoaderViewChildComponent
 
   ],
