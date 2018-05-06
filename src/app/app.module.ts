@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from "./app-routing/app-routing.module";
 
 import { CommunicationService } from '@services/communication/communication.service';
-import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { CookieModule } from 'ngx-cookie';
 import { AuthService } from '@services/auth/auth.service';
 import { UsersService } from '@services/users/users.service';
 import { ArticlesService } from '@services/articles/articles.service';
@@ -68,9 +68,9 @@ import { LoaderViewChildComponent } from "./shared/popup-window/loader/loader-vi
     BsDatepickerModule.forRoot(),
     FileInputAccessorModule,
     NgbModule.forRoot(),
+    CookieModule.forRoot()
   ],
   providers: [
-    CookieService,
     CommunicationService,
     AuthService,
     UsersService,
