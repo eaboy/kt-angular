@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 import { UsersService } from '@services/users/users.service';
 import { CustomValidators } from '@services/validations/custom-validation.service';
 import { LoaderViewChildComponent } from '../../shared/popup-window/loader/loader-viewchild.component';
+import { ModalDeleteComponent } from '../../shared/popup-window/loader/modal-delete.component';
 
 
 @Component({
@@ -27,6 +28,8 @@ export class ArticleComponent implements OnInit {
   @ViewChild(LoaderViewChildComponent)
   popup : LoaderViewChildComponent;
 
+  @ViewChild(ModalDeleteComponent)
+  popupdelete : ModalDeleteComponent;
 
   articleForm: FormGroup;
   constructor(private _commumicationservice: CommunicationService,
@@ -131,8 +134,8 @@ export class ArticleComponent implements OnInit {
           if(data.id){
             this.popup.showPopup("Información");
             this.popup.texto="Articulo creado correctaemnte";
-            var url=`${'/article/'+data.id}`;
-            location.assign(url);
+            /*var url=`${'/article/'+data.id}`;
+            location.assign(url);*/
           }else{
             this.popup.showPopup("ERROR");
             this.popup.texto="Articulo no creado";
@@ -158,12 +161,12 @@ export class ArticleComponent implements OnInit {
   onDeleteArticle(){
     this._articlesservice.deleteArticle(this.postId).subscribe(data =>{
       if(!data){
-        this.popup.showPopup("Información");
-        this.popup.texto=`${"Articulo con id "+this.postId+" borrado correctamente"}`;
+        this.popupdelete.popupOpen("Información");
+        this.popupdelete.texto=`${"Articulo con id "+this.postId+" borrado correctamente"}`;
         //location.assign('/');
       }else{
-        this.popup.showPopup("ERROR");
-        this.popup.texto="Error. Articulo no borrado";
+        this.popupdelete.popupOpen("ERROR");
+        this.popupdelete.texto="Error. Articulo no borrado";
       }
     });
   }
