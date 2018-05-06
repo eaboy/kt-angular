@@ -1,21 +1,12 @@
 import { FormControl, Validators } from '@angular/forms';
 
-// setup simple regex for white listed characters
-const validCharacters = /^(ftp|http|https):\/\/[^ "]+$/;
+const validCharacters = /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/
 
-// create your class that extends the angular validator class
+
 export class CustomValidators extends Validators {
   
-  // create a static method for your validation
   static validateUrl(control: FormControl) {
-
-    if (control.value && control.value.length > 0) {
-      
-      const matches = control.value.match(validCharacters);
-      return matches && matches.length ? { invalid_characters: matches } : null;
-    } else {
-      return null;
-    }
-
+    let check=control.value.includes('localhost') && control.value.startsWith('http://') && control.value.includes('.');
+    return validCharacters.test(control.value) || check ? null :{ validUrl: true };
   }
 }

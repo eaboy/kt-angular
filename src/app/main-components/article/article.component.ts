@@ -49,15 +49,15 @@ export class ArticleComponent implements OnInit {
   ngOnInit() {
     this.articleForm = new FormGroup({
       'idpost': new FormControl(),
-      'title': new FormControl('',Validators.required),
+      'title': new FormControl('',[Validators.required,Validators.maxLength(250)]),
       'id_user': new FormControl(),
       'text': new FormControl('',Validators.required),
       'categories': new FormControl('',Validators.required),
       'pub_date': new FormControl('',Validators.required),
       'slug':new FormControl(),
       'status':new FormControl('',Validators.required),
-      'image':new FormControl('',[Validators.required]),
-      'video':new FormControl('',[Validators.required]),
+      'image':new FormControl('',[Validators.required,Validators.maxLength(200),CustomValidators.validateUrl]),
+      'video':new FormControl('',[Validators.required,Validators.maxLength(200),CustomValidators.validateUrl]),
     });
     this.listcategories$= this._articlesservice.listCategories();
     this.title_post ='Nueva Entrada';
@@ -134,8 +134,8 @@ export class ArticleComponent implements OnInit {
           if(data.id){
             this.popup.showPopup("Información");
             this.popup.texto="Articulo creado correctaemnte";
-            /*var url=`${'/article/'+data.id}`;
-            location.assign(url);*/
+            var url=`${'/article/'+data.id}`;
+            location.assign(url);
           }else{
             this.popup.showPopup("ERROR");
             this.popup.texto="Articulo no creado";

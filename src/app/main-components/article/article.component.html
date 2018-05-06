@@ -17,7 +17,7 @@
                 <div class="form-group" [ngClass]="displayFieldCss('title')">
                     <label for="title" class="control-label required">Título</label>
                     <input name="title" formControlName="title" type="text" id="title" class="form-control" placeholder="Título" value="">
-                    <app-field-error-display [displayError]="isFieldValid('title')" errorMsg="Por favor escriba el titulo"></app-field-error-display>
+                    <app-field-error-display [displayError]="isFieldValid('title')" errorMsg="Por favor escriba el titulo con un maximo de 250 caracteres"></app-field-error-display>
                 </div>
 
                 
@@ -93,7 +93,7 @@
                             <div class="input-group">
                                 <input id="image" name="image" formControlName="image" type="url"  value="" class="form-control"/>
                             </div>
-                            <app-field-error-display [displayError]="isFieldValid('image')" errorMsg="Escriba la url de la imagen"></app-field-error-display>
+                            <app-field-error-display [displayError]="isFieldValid('image') || validUrl" errorMsg="Escriba url válida con un máxinmo de 200 caracteres"></app-field-error-display>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -102,7 +102,7 @@
                             <div class="input-group">
                                 <input id="video" name="video" formControlName="video" type="url"  value="" class="form-control"/>
                             </div>
-                            <app-field-error-display [displayError]="isFieldValid('video')" errorMsg="Escriba la url del video"></app-field-error-display>
+                            <app-field-error-display [displayError]="isFieldValid('video')" errorMsg="Escriba url válida con un máxinmo de 200 caracteres"></app-field-error-display>
                         </div>
                     </div>
                 </div>
