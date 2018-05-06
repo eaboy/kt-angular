@@ -19,20 +19,16 @@ export class AuthService implements CanActivate {
   }
 
   getToken(): string {
-    //this._cookieService.put('token', localStorage.getItem('token'));
-    //return localStorage.getItem('token');
-    return this._cookieService.get('token');
+    return this._cookieService.get('codertext');
   }
 
   setToken(token): void {
-    this._cookieService.put('token', token);
-    //localStorage.setItem('token', token);
+    this._cookieService.put('codertext', token, {httpOnly: false} );
     this.changeAuthStatus(true);
   }
 
   deleteToken(): void {
-    this._cookieService.remove('token');
-    //localStorage.removeItem('token');
+    this._cookieService.remove('codertext');
     this.changeAuthStatus(false);
   }
 
