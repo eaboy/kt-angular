@@ -174,15 +174,18 @@ export class ArticleComponent implements OnInit {
   }
 
   onDeleteArticle(){
-    this._articlesservice.deleteArticle(this.postId).subscribe(data =>{
-      if(!data){
-        this.popupdelete.popupOpen("Información");
-        this.popupdelete.texto=`${"Articulo con id "+this.postId+" borrado correctamente"}`;
-      }else{
-        this.popupdelete.popupOpen("ERROR");
-        this.popupdelete.texto="Error. Articulo no borrado";
-      }
-    });
+    let action = confirm("¿Seguro que desea eliminar este artículo?");
+    if(action){
+      this._articlesservice.deleteArticle(this.postId).subscribe(data =>{
+        if(!data){
+          this.popupdelete.popupOpen("Información");
+          this.popupdelete.texto=`${"Articulo con id "+this.postId+" borrado correctamente"}`;
+        }else{
+          this.popupdelete.popupOpen("ERROR");
+          this.popupdelete.texto="Error. Articulo no borrado";
+        }
+      });
+    }
   }
 
   buildslug(text)

@@ -43,15 +43,18 @@ export class ArticlesListComponent implements OnInit {
     });
   }
   onDeleteArticle(id){
-    this._articlesService.deleteArticle(id).subscribe(data =>{
-      if(!data){
-        this.popup.popupOpen("Información");
-        this.popup.texto=`${"Articulo con id "+id+" borrado correctamente"}`;
-      }else{
-        this.popup.popupOpen("ERROR");
-        this.popup.texto="Error. Articulo no borrado";
-      }
-    });
+    let action = confirm("¿Seguro que desea eliminar este artículo?");
+    if(action){
+      this._articlesService.deleteArticle(id).subscribe(data =>{
+        if(!data){
+          this.popup.popupOpen("Información");
+          this.popup.texto=`${"Articulo con id "+id+" borrado correctamente"}`;
+        }else{
+          this.popup.popupOpen("ERROR");
+          this.popup.texto="Error. Articulo no borrado";
+        }
+      });
+    }
   }
 
   //Función para ordenar la lista de posts 
