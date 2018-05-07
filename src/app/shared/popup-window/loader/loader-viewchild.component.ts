@@ -11,7 +11,7 @@ export class LoaderViewChildComponent {
   popup : PopupWindowComponent;
   
   @Input()
-  texto
+  texto;
 
   showPopup(title) {
     this.popup.isOpen = true;

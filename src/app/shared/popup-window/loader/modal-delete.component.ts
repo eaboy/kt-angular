@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-modal-delete',
@@ -11,8 +11,8 @@ export class ModalDeleteComponent {
   constructor() { }
 
   @Input()
-  texto
-  
+  texto;
+
   popupOpen(title) {
     this.showPopup = true;
   }
