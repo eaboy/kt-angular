@@ -13,7 +13,8 @@ import { UsersService } from '@services/users/users.service';
 import { CustomValidators } from '@services/validations/custom-validation.service';
 import { LoaderViewChildComponent } from '../../shared/popup-window/loader/loader-viewchild.component';
 import { ModalDeleteComponent } from '../../shared/popup-window/loader/modal-delete.component';
-
+import { ImageService } from "@components/images-uploader/image.service";
+import { FileHolder } from "@components/images-uploader/image-upload.component";
 
 @Component({
   selector: 'app-article',
@@ -36,7 +37,17 @@ export class ArticleComponent implements OnInit {
               private _articlesservice: ArticlesService,
               private _activatedRoute: ActivatedRoute,
               private location: Location,
-              private _usersservice: UsersService) { }
+              private _usersservice: UsersService,
+              private _imagesService: ImageService) {
+
+        _imagesService.mensajeError.subscribe(log =>{
+        if(log === null){
+          this.errorUpload=false;
+        }else{
+          this.errorUpload = true;
+        }
+      });
+    }
 
   postId: Article;
   postData$: Observable<Article[]>;
@@ -44,7 +55,10 @@ export class ArticleComponent implements OnInit {
   listcategories$: Observable<Category[]>;
   userid:number;
   username:string;
-  
+  //Rutas de las imagenes recuperadas
+  listadoAdjuntos: string[];
+  errorUpload: boolean = false;
+
 
   ngOnInit() {
     this.articleForm = new FormGroup({
@@ -56,7 +70,7 @@ export class ArticleComponent implements OnInit {
       'pub_date': new FormControl('',Validators.required),
       'slug':new FormControl(),
       'status':new FormControl('',Validators.required),
-      'image':new FormControl('',[Validators.required,Validators.maxLength(200),CustomValidators.validateUrl]),
+      //'image':new FormControl('',[Validators.required,Validators.maxLength(200),CustomValidators.validateUrl]),
       'video':new FormControl('',[Validators.required,Validators.maxLength(200),CustomValidators.validateUrl]),
     });
     this.listcategories$= this._articlesservice.listCategories();
@@ -68,7 +82,7 @@ export class ArticleComponent implements OnInit {
     this.username=this._usersservice.getUserName();
 
     if(this.postId){
-      this.title_post = `${'Editando entrada ID: '+this.postId}`
+      this.title_post = "Edición de artículo";
       var postData = this._articlesservice.getArticle(this.postId).subscribe(data =>{
         console.log(data.categories);
         if(data.id){
@@ -81,9 +95,10 @@ export class ArticleComponent implements OnInit {
           'pub_date': moment(data.pub_date).format(),
           'slug':data.slug,
           'status': data.status,
-          'image': data.image,
+          //'image': data.image,
           'video': data.video
       });
+        this.getAdjuntos(); 
         }else{
           console.log("Some error occured")
           alert("Ha ocurrido un error")
@@ -163,7 +178,6 @@ export class ArticleComponent implements OnInit {
       if(!data){
         this.popupdelete.popupOpen("Información");
         this.popupdelete.texto=`${"Articulo con id "+this.postId+" borrado correctamente"}`;
-        //location.assign('/');
       }else{
         this.popupdelete.popupOpen("ERROR");
         this.popupdelete.texto="Error. Articulo no borrado";
@@ -178,4 +192,17 @@ export class ArticleComponent implements OnInit {
             .replace(/\s+/g, '-')
             .replace(/[^a-z0-9-]/g, '');
   }
+
+  getAdjuntos(): void {
+   this._imagesService.getImagenPost(this.postId).subscribe(data=>{     
+        this.listadoAdjuntos = data;
+      });
+  }
+
+  onRemoved(file: FileHolder): void{
+    this._imagesService.eliminarImagenPost(file.src).subscribe(data=>{});
+  }
+  
+
+
 }

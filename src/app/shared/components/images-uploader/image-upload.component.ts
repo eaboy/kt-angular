@@ -4,6 +4,8 @@ import {Headers} from '@angular/http';
 import {ImageService} from './image.service';
 import {Style} from "./style";
 import {UploadMetadata} from './before-upload.interface';
+import { Article } from "@interfaces/articles";
+import { User } from "@interfaces/users";
 
 export class FileHolder {
   public pending: boolean = false;
@@ -25,7 +27,7 @@ export class ImageUploadComponent implements OnInit, OnChanges {
   fileOver: boolean = false;
   showFileTooLargeMessage: boolean = false;
 
-  @Input() objeto: any;
+  @Input() objeto: User | Article;
   @Input() beforeUpload: (UploadMetadata) => UploadMetadata | Promise<UploadMetadata> = data => data;
   @Input() buttonCaption: string = 'Select Images';
   @Input('class') cssClass: string = 'img-ul';
@@ -108,7 +110,7 @@ export class ImageUploadComponent implements OnInit, OnChanges {
     if (--this.pendingFilesCounter == 0) {
       this.uploadStateChanged.emit(false);
     }
-    this.imageService.getAdjuntos(this.objeto).subscribe(data=>{
+    this.imageService.getAdjuntos(this.url, this.objeto).subscribe(data=>{
       this.uploadedFiles = data;
       this.processUploadedFiles();      
     });
@@ -169,6 +171,15 @@ export class ImageUploadComponent implements OnInit, OnChanges {
 
   private uploadSingleFile(fileHolder: FileHolder, url = this.url, customForm?: { [name: string]: any }) {
     if (url) {
+      if(url === '/subirImagenPost/'){
+        this.uploadedFiles = [];
+        this.fileCounter = 0;     
+        this.preview = false;
+        this.imageService.mensajeError.emit('Error');
+        return;
+      }else{
+        this.preview = true;
+      }
       this.pendingFilesCounter++;
       fileHolder.pending = true;
 

@@ -61,17 +61,12 @@ export class UserComponent implements OnInit {
         first_name: this.formulario.value.first_name,
         last_name: this.formulario.value.last_name,
         email: this.formulario.value.email,
-        password: 'moebius2',
       };
 
       this._usersservice.updateUser(this.userid, user).subscribe(data => {
           if (data.id) {
-            //this.popup.showPopup('Información');
-            //this.popup.texto = 'Datos guardados correctamente';
             console.log('Datos guardados correctamente');
           } else {
-            //this.popup.showPopup('ERROR');
-            //this.popup.texto = 'Los datos no se han guardado';
             console.log('Los datos no se han guardado');
           }
         });
@@ -96,14 +91,13 @@ export class UserComponent implements OnInit {
   }
 
   getAdjuntos(): void {
-   this._imagesService.getAdjuntos(this.userid).subscribe(data=>{     
+   this._imagesService.getAvatar(this.userid).subscribe(data=>{     
         this.listadoAdjuntos = data;
       });
   }
 
   onRemoved(file: FileHolder): void{
-    console.log(file.src);
-    this._imagesService.eliminarAdjunto(file.src).subscribe(data=>{});
+    this._imagesService.eliminarAvatar(file.src).subscribe(data=>{});
   }
 
 

@@ -1,9 +1,5 @@
 @import  url("https://cdn.quilljs.com/1.2.2/quill.snow.css");
 
-textarea{
-    width: 100%;
-    border: 1px solid #ccc;
-}
 select#categories,select#status{
     width: 100%;
     padding: 5px;
@@ -11,7 +7,9 @@ select#categories,select#status{
 }
 
 select option{
-    font-size: 15px
+    color: #151515;
+    font-family: "metropolis-medium", sans-serif;
+    font-size: 1.1rem;
 }
 quill-editor{
     display: inline-block;
@@ -50,8 +48,15 @@ input[type="text"]{
   }
 
   quill-editor.form-control, select.form-control{
-    background: transparent
+    background: transparent;
+    color: #151515;
+    font-family: "metropolis-medium", sans-serif;
+    font-size: 1.2rem;
 }
 .input-group .form-control{
     z-index: 0;
+}
+
+.error{
+    color: red;
 }

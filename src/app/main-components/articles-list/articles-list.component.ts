@@ -27,11 +27,17 @@ export class ArticlesListComponent implements OnInit {
   
   idus:string;
   postId: Article;
+  //sorting
+  key: string = 'pub_date'; //por defecto es la fecha de publicación del post
+  reverse: boolean = false;
+  //pagination
+   p: number = 1; // número de página por defecto para la paginación
+
+
   
   ngOnInit() {
     this.idus=this._usersservice.getUserId();
     this.articles$=this._articlesService.listArticles(this.idus);
-    //console.log(this.articles$);
     this._activatedRoute.params.subscribe(paramsId => {
       this.postId = paramsId.postId;
     });
@@ -41,12 +47,16 @@ export class ArticlesListComponent implements OnInit {
       if(!data){
         this.popup.popupOpen("Información");
         this.popup.texto=`${"Articulo con id "+id+" borrado correctamente"}`;
-        //this._alerservice.success(`${"Articulo con id "+id+" borrado correctamente"}`);
-        //alert(`${"Articulo con id "+id+" borrado correctamente"}`);
       }else{
         this.popup.popupOpen("ERROR");
         this.popup.texto="Error. Articulo no borrado";
       }
     });
+  }
+
+  //Función para ordenar la lista de posts 
+  sort(key){
+    this.key = key;
+    this.reverse = !this.reverse;
   }
 }

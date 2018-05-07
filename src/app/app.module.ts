@@ -31,6 +31,9 @@ import { ImageUploadComponent } from "@components/images-uploader/image-upload.c
 import { ImageService } from "@components/images-uploader/image.service";
 import { FileDropDirective } from "@components/images-uploader/file-drop.directive";
 import { FieldErrorDisplayComponent } from '@components/field-error-display/field-error-display.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Ng2OrderModule } from 'ng2-order-pipe';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import { PopupWindowComponent } from './shared/popup-window/popup-window.component';
 import { ModalDeleteComponent } from './shared/popup-window/loader/modal-delete.component';
@@ -68,7 +71,11 @@ import { LoaderViewChildComponent } from "./shared/popup-window/loader/loader-vi
     BsDatepickerModule.forRoot(),
     FileInputAccessorModule,
     NgbModule.forRoot(),
-    CookieModule.forRoot()
+    CookieModule.forRoot(),
+    Ng2SearchPipeModule,
+    Ng2OrderModule,
+    NgxPaginationModule
+    
   ],
   providers: [
     CommunicationService,
