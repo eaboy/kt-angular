@@ -56,7 +56,7 @@ export class UsersService {
   }
 
   getUser(): Observable<User> {
-    return this._communicationService.getData(this.userPath+this.getUserId());
+    return this._communicationService.getData(this.userPath);
   }
 
   updateUser(userId, user: User): Observable<any> {
