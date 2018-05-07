@@ -57,7 +57,7 @@ import { LoaderViewChildComponent } from "./shared/popup-window/loader/loader-vi
     FieldErrorDisplayComponent,
     PopupWindowComponent,
     ModalDeleteComponent,
-    LoaderViewChildComponent
+    LoaderViewChildComponent,
 
   ],
   imports: [
