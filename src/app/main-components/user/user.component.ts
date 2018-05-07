@@ -46,6 +46,7 @@ export class UserComponent implements OnInit {
       first_name: '',
       last_name: '',
       email: '',
+      password: '',
       instagram: '',
       twitter: '',
       facebook: '',
@@ -61,12 +62,17 @@ export class UserComponent implements OnInit {
         first_name: this.formulario.value.first_name,
         last_name: this.formulario.value.last_name,
         email: this.formulario.value.email,
+        password: this.formulario.value.password,
       };
 
       this._usersservice.updateUser(this.userid, user).subscribe(data => {
           if (data.id) {
+            this.popup.showPopup('Información');
+            this.popup.texto = 'Datos guardados correctamente';
             console.log('Datos guardados correctamente');
           } else {
+            this.popup.showPopup('ERROR');
+            this.popup.texto = 'Los datos no se han guardado';
             console.log('Los datos no se han guardado');
           }
         });
@@ -81,6 +87,7 @@ export class UserComponent implements OnInit {
         first_name: data[0].first_name,
         last_name: data[0].last_name || '',
         email: data[0].email || '',
+        password: data[0].password || '',
         instagram: data[0].instagram || '',
         twitter: data[0].twitter || '',
         facebook: data[0].facebook || '',

@@ -4,13 +4,13 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { Login, User } from '@interfaces/users';
 import { AuthService } from '@services/auth/auth.service';
-import * as jwt_decode from "jwt-decode";
+import * as jwt_decode from 'jwt-decode';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 
 
 /* Servicio encargado de gestionar la comunicación con el API relativa al modelo users.
-   Consume el servicio de comunicaciones y provee de métodos a los componentes para gestionar las acciones 
+   Consume el servicio de comunicaciones y provee de métodos a los componentes para gestionar las acciones
    relacionadas con los usuarios. */
 
 @Injectable()
@@ -20,34 +20,34 @@ export class UsersService {
   private verifyTokenPath = `/token-verify/`;
   private userPath = `/user/`;
   private logoutPath = `/logout/`;
-  private recuperarPasswordPath = '/recuperarPassword/'
-  private enviarEmailPath = '/sendEmailPassword/'
-  
+  private recuperarPasswordPath = '/recuperarPassword/';
+  private enviarEmailPath = '/sendEmailPassword/';
+
   private tokenData;
   @Output() estaLogueado: EventEmitter<boolean> = new EventEmitter();
 
 
   constructor(private _communicationService: CommunicationService, private _authService: AuthService, private router: Router) {
-    if(this._authService.getToken()) {
+    if (this._authService.getToken()) {
       this.checkToken();
     }
   }
 
   loginUser(login: Login): Observable<any> {
     return this._communicationService.postData(this.loginPath, login).pipe(map(data => {
-      if(data.token) {
+      if (data.token) {
         this._authService.setToken(data.token);
         this.extractTokenData();
         this.estaLogueado.emit(true);
         return {success: true, message: `Successfully loged in.`};
-      }else if(data.non_field_errors != null){
+      } else if (data.non_field_errors != null)  {
         this.estaLogueado.emit(false);
         return {success: false, message: data.non_field_errors};
       }
       return data;
     }));
   }
-  
+
   logoutUser(): Observable<any> {
     this._authService.deleteToken();
     this.tokenData = null;
@@ -72,7 +72,7 @@ export class UsersService {
       'token' : this._authService.getToken()
     };
     this._communicationService.postData(this.verifyTokenPath, token).subscribe(data => {
-      if(data.token){
+      if (data.token) {
         this.estaLogueado.emit(true);
         this._authService.changeAuthStatus(true);
       } else {
@@ -84,17 +84,16 @@ export class UsersService {
   }
 
   private extractTokenData(): void {
-    try{
+    try {
       this.tokenData = jwt_decode(this._authService.getToken());
-    }
-    catch(Error){
-      console.log('Error decoding token', Error)
+    } catch (Error) {
+      console.log('Error decoding token', Error);
     }
   }
 
   getUserId() {
     this.extractTokenData();
-    if(this.tokenData !== null && this.tokenData !== undefined){
+    if (this.tokenData !== null && this.tokenData !== undefined) {
       return this.tokenData.user_id;
     }
     return false;
@@ -102,7 +101,7 @@ export class UsersService {
 
   getUserName() {
     this.extractTokenData();
-    if(this.tokenData !== null && this.tokenData !== undefined){
+    if (this.tokenData !== null && this.tokenData !== undefined) {
       return this.tokenData.username;
     }
     return false;
@@ -111,7 +110,7 @@ export class UsersService {
 
   buscarUsuario(login: Login): Observable<any> {
     return this._communicationService.postData(this.recuperarPasswordPath, login).pipe(map(data => {
-      if(data.token) {
+      if (data.token) {
           console.log(data);
       }
       return data;
@@ -119,10 +118,9 @@ export class UsersService {
   }
 
   enviarEmailPassword(email: string): Observable<any> {
-    return this._communicationService.getData(this.enviarEmailPath+'?email='+email).pipe(map(data => {
+    return this._communicationService.getData(this.enviarEmailPath + '?email=' + email).pipe(map(data => {
       return data;
     }));
-    
   }
 
 }
