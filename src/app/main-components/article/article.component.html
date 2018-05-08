@@ -65,7 +65,7 @@
                     <div class="col-md-6">
                         <label for="image">Imagen del artículo</label>
                         <image-upload [max]="1"
-                        url="/subirImagen/{{idpost}}"
+                        url="/subirImagen/"
                         [uploadedFiles]="listadoAdjuntos"
                         [extensions]="['jpg','png','gif']"
                         (removed)="onRemoved($event)"
