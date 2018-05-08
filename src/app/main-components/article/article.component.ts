@@ -151,6 +151,7 @@ export class ArticleComponent implements OnInit {
             this._imagesService.idArticulo = data.id;
             this.popup.showPopup("Información");
             this.popup.texto="Artículo creado correctamente. Si quieres, puedes añadirle una imagen.";
+            location.assign('/article/'+data.id);
           }else{
             this.popup.showPopup("ERROR");
             this.popup.texto="Artículo no creado";

@@ -58,10 +58,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" *ngIf="postId">
                     Puedes elegir entre subir una imagen o introducir la url de un vídeo:
                 </div>
-                <div class="row">
+                <div class="row" *ngIf="postId">
                     <div class="col-md-6">
                         <label for="image">Imagen del artículo</label>
                         <image-upload [max]="1"
@@ -90,7 +90,7 @@
                 </div>
                 <div class="col-md-12 text-center row_buttons">
                     <button (click)="onSaveArticle()" class="btn-primary">Guardar</button>
-                    <button (click)="onDeleteArticle()">Borrar</button>
+                    <button (click)="onDeleteArticle()"  *ngIf="postId">Borrar</button>
                 </div>
             </article>    <!-- fin del artículo -->
         </div>
