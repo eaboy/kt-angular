@@ -21,6 +21,9 @@ export class UserComponent implements OnInit {
   @ViewChild(LoaderViewChildComponent)
   popup: LoaderViewChildComponent;
 
+  @ViewChild(ModalDeleteComponent)
+  popupdelete: ModalDeleteComponent;
+
 
   formulario: FormGroup;
   userid: number;
@@ -58,14 +61,14 @@ export class UserComponent implements OnInit {
 
     if (this.formulario.valid) {
       const user: User = {
-        username: this.formulario.value.username,        
+        username: this.formulario.value.username,
         first_name: this.formulario.value.first_name,
         last_name: this.formulario.value.last_name,
         email: this.formulario.value.email,
         instagram_user: this.formulario.value.instagram,
         twitter_user: this.formulario.value.twitter,
         facebook_user: this.formulario.value.facebook,
-        about_me: this.formulario.value.about_me,                
+        about_me: this.formulario.value.about_me,
       };
       this._usersservice.updateUser(this.userid, user).subscribe(data => {
           console.log(data);
@@ -81,7 +84,7 @@ export class UserComponent implements OnInit {
         },
         error => {
           this.popup.showPopup('ERROR');
-          this.popup.texto = error.error.email;          
+          this.popup.texto = error.error.email;
       });
     }
   }
@@ -89,9 +92,9 @@ export class UserComponent implements OnInit {
   recuperarInformacion(): void {
     this._usersservice.getUser().subscribe(data => {
       this.usuarioRecuperado = data;
-      this.nombreUsuario = data[0].username;      
+      this.nombreUsuario = data[0].username;
       this.formulario.setValue({
-        username: data[0].username,        
+        username: data[0].username,
         first_name: data[0].first_name,
         last_name: data[0].last_name || '',
         email: data[0].email || '',
@@ -100,25 +103,33 @@ export class UserComponent implements OnInit {
         facebook: data[0].facebook_user || '',
         about_me: data[0].about_me || '',
       });
-      this.getAdjuntos(); 
+      this.getAdjuntos();
     });
   }
 
   getAdjuntos(): void {
-   this._imagesService.getAvatar(this.userid).subscribe(data=>{     
+   this._imagesService.getAvatar(this.userid).subscribe(data => {
         this.listadoAdjuntos = data;
       });
   }
 
-  onRemoved(file: FileHolder): void{
-    this._imagesService.eliminarAvatar(file.src).subscribe(data=>{});
+  onRemoved(file: FileHolder): void {
+    this._imagesService.eliminarAvatar(file.src).subscribe(data => {});
   }
 
 
-  eliminarCuenta(){
-    let action = confirm("¿Seguro que desea eliminar su usuario? Esta acción es irreversible");
-    if(action){
-        this._usersservice.deleteUser().subscribe(data => {});
+  eliminarCuenta() {
+    const action = confirm('¿Seguro que desea eliminar este operario?. La acción será irreversible');
+    if (action) {
+      this._usersservice.deleteUser().subscribe(data => {
+        if (!data) {
+          this.popupdelete.popupOpen('Información');
+          this.popupdelete.texto = `${'Usuario borrado correctamente.'}`;
+        } else {
+          this.popupdelete.popupOpen('ERROR');
+          this.popupdelete.texto = 'Error. Usuario no borrado';
+        }
+      });
     }
   }
 
