@@ -2,63 +2,61 @@
   <div class="row">
       <div class="col-md-12">
           <div>
-              <h3 class="entry__title">Edición de usuario</h3>
+              <h3 class="entry__title">Datos personales de {{nombreUsuario}}</h3>
           </div>
       </div>
   </div>
   <form name="formulario" id="formulario" [formGroup]="formulario" (ngSubmit)="modifyUser()">
+      <input type="hidden" formControlName="username">
     <div class="row">
       <div class="col-md-6">
-        <label for="">Usuario</label>
-        <input type="text" formControlName="username">
+        <label for="first_name">Nombre</label>
+        <input type="text" class="full-width" formControlName="first_name">
       </div>
       <div class="col-md-6">
-        <label for="">Nombre</label>
-        <input type="text" formControlName="first_name">
+        <label for="apellidos">Apellidos</label>
+        <input type="text" class="full-width" formControlName="last_name">
       </div>
       <div class="col-md-6">
-        <label for="">Apellidos</label>
-        <input type="text" formControlName="last_name">
+        <label for="email">Email</label>
+        <input type="text" class="full-width" formControlName="email">
       </div>
       <div class="col-md-6">
-        <label for="">Email</label>
-        <input type="text" formControlName="email">
+        <label for="password">Password</label>
+        <input type="text" class="full-width" formControlName="password">
       </div>
       <div class="col-md-6">
-        <label for="">Password</label>
-        <input type="text" formControlName="password">
+        <label for="instagram">Instagram</label>
+        <input type="text" class="full-width" formControlName="instagram">
       </div>
       <div class="col-md-6">
-        <label for="">Instagram</label>
-        <input type="text" formControlName="instagram">
+        <label for="twitter">Twitter</label>
+        <input type="text" class="full-width" formControlName="twitter">
       </div>
       <div class="col-md-6">
-        <label for="">Twitter</label>
-        <input type="text" formControlName="twitter">
+        <label for="facebook">Facebook</label>
+        <input type="text" class="full-width" formControlName="facebook">
       </div>
       <div class="col-md-6">
-        <label for="">Facebook</label>
-        <input type="text" formControlName="facebook">
+          <image-upload [max]="1"
+           url="/subirAvatar/{{userid}}"
+            [uploadedFiles]="listadoAdjuntos"
+            [extensions]="['jpg','png','gif']"
+            (removed)="onRemoved($event)"
+            [buttonCaption]="'Subir Avatar'"
+            [dropBoxMessage]="'Arrastra tu avatar aquí'"
+            [clearButtonCaption]="'Borrar'"
+            [objeto]="usuarioRecuperado"
+            ></image-upload>
       </div>
-      <div class="col-md-6">
-        <label for="">Sobre m&iacute;</label>
-        <input type="textarea" formControlName="about_me">
+      <div class="col-md-12">
+        <label for="about_me">Sobre m&iacute;</label>
+        <textarea class="full-width" formControlName="about_me"> </textarea>
       </div>      
     </div>
     <div>
       <button type="submit">Guardar</button>
     </div>
   </form>
-  <label>Avatar de usuario:</label>
-<image-upload [max]="1"
- url="/subirAvatar/{{userid}}"
-  [uploadedFiles]="listadoAdjuntos"
-  [extensions]="['jpg','png','gif']"
-  (removed)="onRemoved($event)"
-  [buttonCaption]="'Subir Imagen'"
-  [dropBoxMessage]="'Arrastra tu imagen aquí'"
-  [clearButtonCaption]="'Borrar'"
-  [objeto]="usuarioRecuperado"
-  ></image-upload>
 </div>
 <app-loader-vc></app-loader-vc>

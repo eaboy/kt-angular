@@ -24,6 +24,7 @@ export class UserComponent implements OnInit {
 
   formulario: FormGroup;
   userid: number;
+  nombreUsuario: string;
   listadoAdjuntos: string[];
   mensajeExito: boolean = false;
   usuarioRecuperado: User = null;
@@ -58,11 +59,12 @@ export class UserComponent implements OnInit {
 
     if (this.formulario.valid) {
       const user: User = {
-        username: this.formulario.value.username,
+        username: this.formulario.value.username,        
         first_name: this.formulario.value.first_name,
         last_name: this.formulario.value.last_name,
         email: this.formulario.value.email,
         password: this.formulario.value.password,
+        
       };
 
       this._usersservice.updateUser(this.userid, user).subscribe(data => {
@@ -82,8 +84,9 @@ export class UserComponent implements OnInit {
   recuperarInformacion(): void {
     this._usersservice.getUser().subscribe(data => {
       this.usuarioRecuperado = data;
+      this.nombreUsuario = data[0].username;      
       this.formulario.setValue({
-        username: data[0].username,
+        username: data[0].username,        
         first_name: data[0].first_name,
         last_name: data[0].last_name || '',
         email: data[0].email || '',
