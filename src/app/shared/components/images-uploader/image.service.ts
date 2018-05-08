@@ -13,6 +13,7 @@ export class ImageService {
 
 
   public mensajeError = new EventEmitter<string>();
+  public idArticulo: any = null;
 
   constructor(private http: Http, private _httpClient: HttpClient) {
   }
@@ -57,9 +58,8 @@ public postImage(url: string, image: File, hs?: Headers | { [name: string]: any 
 
 
   getAdjuntos(url: string, obj:any): Observable<any[]>{  
-    console.log('url', url);
-    if(url.startsWith('/subirImagenPost')){
-      return this.getImagenPost(obj);
+    if(url.startsWith('/subirImagen')){
+      return this.getImagenPost(this.idArticulo);
     }else{
       return this.getAvatar(obj);
     }
@@ -83,12 +83,13 @@ public postImage(url: string, image: File, hs?: Headers | { [name: string]: any 
 
   //Llamadas a endpoints para la gestión de imágenes de artículos
 
-  getImagenPost(id: any): Observable<string[]> { 
-        return this._httpClient.get<string[]>(`${environment.apiUrl}/getImagenPost/${id}`);    
+  getImagenPost(id: any): Observable<string[]> {
+        this.idArticulo = id;
+        return this._httpClient.get<string[]>(`${environment.apiUrl}/getImagen/${id}`);    
   }
 
   eliminarImagenPost(id: string): Observable<boolean> {
-    return this._httpClient.get<boolean>(`${environment.apiUrl}/deleteImagenPost${id}`); 
+    return this._httpClient.get<boolean>(`${environment.apiUrl}/deleteImagen${id}`); 
   }
 
 

@@ -47,7 +47,6 @@ export class UserComponent implements OnInit {
       first_name: '',
       last_name: '',
       email: '',
-      password: '',
       instagram: '',
       twitter: '',
       facebook: '',
@@ -63,11 +62,13 @@ export class UserComponent implements OnInit {
         first_name: this.formulario.value.first_name,
         last_name: this.formulario.value.last_name,
         email: this.formulario.value.email,
-        password: this.formulario.value.password,
-        
+        instagram_user: this.formulario.value.instagram,
+        twitter_user: this.formulario.value.twitter,
+        facebook_user: this.formulario.value.facebook,
+        about_me: this.formulario.value.about_me,                
       };
-
       this._usersservice.updateUser(this.userid, user).subscribe(data => {
+          console.log(data);
           if (data.id) {
             this.popup.showPopup('Información');
             this.popup.texto = 'Datos guardados correctamente';
@@ -77,7 +78,11 @@ export class UserComponent implements OnInit {
             this.popup.texto = 'Los datos no se han guardado';
             console.log('Los datos no se han guardado');
           }
-        });
+        },
+        error => {
+          this.popup.showPopup('ERROR');
+          this.popup.texto = error.error.email;          
+      });
     }
   }
 
@@ -90,10 +95,9 @@ export class UserComponent implements OnInit {
         first_name: data[0].first_name,
         last_name: data[0].last_name || '',
         email: data[0].email || '',
-        password: data[0].password || '',
-        instagram: data[0].instagram || '',
-        twitter: data[0].twitter || '',
-        facebook: data[0].facebook || '',
+        instagram: data[0].instagram_user || '',
+        twitter: data[0].twitter_user || '',
+        facebook: data[0].facebook_user || '',
         about_me: data[0].about_me || '',
       });
       this.getAdjuntos(); 
@@ -110,5 +114,12 @@ export class UserComponent implements OnInit {
     this._imagesService.eliminarAvatar(file.src).subscribe(data=>{});
   }
 
+
+  eliminarCuenta(){
+    let action = confirm("¿Seguro que desea eliminar su usuario? Esta acción es irreversible");
+    if(action){
+        this._usersservice.deleteUser().subscribe(data => {});
+    }
+  }
 
 }

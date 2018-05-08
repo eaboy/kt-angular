@@ -35,6 +35,11 @@ export class CommunicationService {
         return this._http.put(this.baseUrl + url, body, this.setHeaders());
     }
 
+    patchData(url: string, body: object): Observable<any> {
+        return this._http.patch(this.baseUrl + url, body, this.setHeaders());
+    }
+
+
     deleteData(url: string): Observable<any> {
         return this._http.delete(this.baseUrl + url, this.setHeaders());
     }

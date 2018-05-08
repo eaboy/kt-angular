@@ -18,7 +18,5 @@ export class LoaderViewChildComponent {
     this.popup.title = title;
   }
 
-  popupClosed(event) {
-    console.log(event);
-  }
+  popupClosed(event) {}
 }

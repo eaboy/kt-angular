@@ -171,14 +171,16 @@ export class ImageUploadComponent implements OnInit, OnChanges {
 
   private uploadSingleFile(fileHolder: FileHolder, url = this.url, customForm?: { [name: string]: any }) {
     if (url) {
-      if(url === '/subirImagenPost/'){
-        this.uploadedFiles = [];
-        this.fileCounter = 0;     
-        this.preview = false;
-        this.imageService.mensajeError.emit('Error');
-        return;
-      }else{
-        this.preview = true;
+      if(url === '/subirImagen/'){
+        if(this.imageService.idArticulo === null || this.imageService.idArticulo == 'undefined'){
+          this.uploadedFiles = [];
+          this.fileCounter = 0;     
+          this.preview = false;
+          this.imageService.mensajeError.emit('Error');
+          return;
+        }else{
+          this.url = this.url + this.imageService.idArticulo;
+        }
       }
       this.pendingFilesCounter++;
       fileHolder.pending = true;

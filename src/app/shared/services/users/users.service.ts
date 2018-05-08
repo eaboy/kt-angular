@@ -22,6 +22,7 @@ export class UsersService {
   private logoutPath = `/logout/`;
   private recuperarPasswordPath = '/recuperarPassword/';
   private enviarEmailPath = '/sendEmailPassword/';
+  private eliminarUsuarioPath = '/deleteUser/';
 
   private tokenData;
   @Output() estaLogueado: EventEmitter<boolean> = new EventEmitter();
@@ -60,7 +61,7 @@ export class UsersService {
   }
 
   updateUser(userId, user: User): Observable<any> {
-    return this._communicationService.editData(`/updateUser/` + userId, user);
+    return this._communicationService.patchData(`/updateUser/` + userId, user);
   }
 
   isAuthenticated(): Subject<boolean> {
@@ -119,6 +120,12 @@ export class UsersService {
 
   enviarEmailPassword(email: string): Observable<any> {
     return this._communicationService.getData(this.enviarEmailPath + '?email=' + email).pipe(map(data => {
+      return data;
+    }));
+  }
+
+  deleteUser(){
+    return this._communicationService.deleteData(this.eliminarUsuarioPath ).pipe(map(data => {
       return data;
     }));
   }

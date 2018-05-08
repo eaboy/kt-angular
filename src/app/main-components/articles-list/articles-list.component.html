@@ -38,7 +38,10 @@
           <td><img src="{{ article.image }}" alt="{{ article.title }}" width="200px"></td>
           <td>{{ article.title }}</td>
           <td>{{ article.pub_date }}</td>
-          <td><a routerLink="../article/{{ article.id }}"><i class="fa fa-edit"></i></a><a (click)="onDeleteArticle(article.id)"><i class="fa fa-trash"></i></a></td>
+          <td>
+            <a routerLink="../article/{{ article.id }}"><i class="fa fa-edit"></i></a>
+            <a (click)="onDeleteArticle(article.id)"><i class="fa fa-trash manita"></i></a>
+          </td>
         </tr>
     </table>           
   </div>

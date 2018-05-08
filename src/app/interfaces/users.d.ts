@@ -4,6 +4,7 @@ export declare interface User {
     first_name: string,
     last_name: string,
     email: string,
+    emailOfuscado?: string,
     password?: string,
     id_user?: number,
     image?: string,

@@ -48,7 +48,7 @@ export class ArticlesListComponent implements OnInit {
       this._articlesService.deleteArticle(id).subscribe(data =>{
         if(!data){
           this.popup.popupOpen("Información");
-          this.popup.texto=`${"Articulo con id "+id+" borrado correctamente"}`;
+          this.popup.texto=`${"Articulo borrado correctamente"}`;
         }else{
           this.popup.popupOpen("ERROR");
           this.popup.texto="Error. Articulo no borrado";

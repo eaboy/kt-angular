@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from "@services/users/users.service";
-import { User } from "app/beans/User";
+import { User } from "@interfaces/users";
+
 
 @Component({
   selector: 'app-reset-password',

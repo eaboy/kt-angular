@@ -18,7 +18,6 @@ export class ModalDeleteComponent {
   }
 
   popupClosed(event) {
-    console.log(event);
     this.showPopup = false;
     location.assign('/');
   }

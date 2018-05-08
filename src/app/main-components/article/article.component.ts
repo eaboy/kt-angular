@@ -70,8 +70,7 @@ export class ArticleComponent implements OnInit {
       'pub_date': new FormControl('',Validators.required),
       'slug':new FormControl(),
       'status':new FormControl('',Validators.required),
-      //'image':new FormControl('',[Validators.required,Validators.maxLength(200),CustomValidators.validateUrl]),
-      'video':new FormControl('',[Validators.required,Validators.maxLength(200),CustomValidators.validateUrl]),
+      'video':new FormControl('',[Validators.maxLength(200),CustomValidators.validateUrl]),
     });
     this.listcategories$= this._articlesservice.listCategories();
     this.title_post ='Nueva Entrada';
@@ -84,7 +83,6 @@ export class ArticleComponent implements OnInit {
     if(this.postId){
       this.title_post = "Edición de artículo";
       var postData = this._articlesservice.getArticle(this.postId).subscribe(data =>{
-        console.log(data.categories);
         if(data.id){
           this.articleForm.setValue({
           'idpost': data.id, 
@@ -98,12 +96,15 @@ export class ArticleComponent implements OnInit {
           //'image': data.image,
           'video': data.video
       });
+        this._imagesService.idArticulo = data.id;
         this.getAdjuntos(); 
         }else{
           console.log("Some error occured")
           alert("Ha ocurrido un error")
         };
       });
+    }else{
+      this._imagesService.idArticulo = null;
     }
   }
 
@@ -147,13 +148,12 @@ export class ArticleComponent implements OnInit {
       }else{
         this._articlesservice.createArticle(article).subscribe(data =>{
           if(data.id){
+            this._imagesService.idArticulo = data.id;
             this.popup.showPopup("Información");
-            this.popup.texto="Articulo creado correctaemnte";
-            var url=`${'/article/'+data.id}`;
-            location.assign(url);
+            this.popup.texto="Artículo creado correctamente. Si quieres, puedes añadirle una imagen.";
           }else{
             this.popup.showPopup("ERROR");
-            this.popup.texto="Articulo no creado";
+            this.popup.texto="Artículo no creado";
           }
         });
       }
@@ -179,7 +179,7 @@ export class ArticleComponent implements OnInit {
       this._articlesservice.deleteArticle(this.postId).subscribe(data =>{
         if(!data){
           this.popupdelete.popupOpen("Información");
-          this.popupdelete.texto=`${"Articulo con id "+this.postId+" borrado correctamente"}`;
+          this.popupdelete.texto=`${"Articulo borrado correctamente."}`;
         }else{
           this.popupdelete.popupOpen("ERROR");
           this.popupdelete.texto="Error. Articulo no borrado";
@@ -197,7 +197,7 @@ export class ArticleComponent implements OnInit {
   }
 
   getAdjuntos(): void {
-   this._imagesService.getImagenPost(this.postId).subscribe(data=>{     
+   this._imagesService.getImagenPost(this._imagesService.idArticulo).subscribe(data=>{
         this.listadoAdjuntos = data;
       });
   }

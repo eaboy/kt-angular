@@ -17,7 +17,7 @@
                 <div class="form-group" [ngClass]="displayFieldCss('title')">
                     <label for="title" class="control-label required">Título</label>
                     <input name="title" formControlName="title" type="text" id="title" class="full-width" value="">
-                    <app-field-error-display [displayError]="isFieldValid('title')" errorMsg="Por favor escriba el titulo con un maximo de 250 caracteres"></app-field-error-display>
+                    <app-field-error-display [displayError]="isFieldValid('title')" errorMsg="Por favor, escribe el título con un máximo de 250 caracteres."></app-field-error-display>
                 </div>               
                 <div class="row">
                     <div class="col-md-4">
@@ -27,7 +27,7 @@
                                 <input id="fecha" name="pub_date" formControlName="pub_date" type="text" #dp="bsDatepicker" bsDatepicker [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'}" value="">
                                 <span class="input-group-addon btn btn-success" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen"><i class="fa fa-calendar"></i></span>
                             </div>
-                            <app-field-error-display [displayError]="isFieldValid('pub_date')" errorMsg="Por favor indique la fecha"></app-field-error-display>
+                            <app-field-error-display [displayError]="isFieldValid('pub_date')" errorMsg="Por favor, indica la fecha."></app-field-error-display>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -36,7 +36,7 @@
                             <select multiple name="categories" id="categories" formControlName="categories">
                                 <option *ngFor="let category of listcategories$ | async" value={{category.id}} [value]="categories">{{category.name}}</option>
                             </select>                        
-                            <app-field-error-display [displayError]="isFieldValid('categories')" errorMsg="Por favor marque al menos una categoria"></app-field-error-display>
+                            <app-field-error-display [displayError]="isFieldValid('categories')" errorMsg="Por favor, marca al menos una categoría."></app-field-error-display>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -46,7 +46,7 @@
                                 <option value="borrador">Borrador</option>
                                 <option value="finalizado">Publicado</option>
                             </select>
-                            <app-field-error-display [displayError]="isFieldValid('status')" errorMsg="Por favor indique el estado"></app-field-error-display>
+                            <app-field-error-display [displayError]="isFieldValid('status')" errorMsg="Por favor, indica el estado de tu publicación."></app-field-error-display>
                         </div>
                     </div> 
                 </div>              
@@ -54,22 +54,18 @@
                     <div class="col">
                         <div class="form-group" [ngClass]="displayFieldCss('text')">
                             <quill-editor [style]="{height: '400px'}" formControlName="text" class="form-control" ></quill-editor>
-                            <app-field-error-display [displayError]="isFieldValid('text')" errorMsg="Escriba el contenido de la publicación"></app-field-error-display>
+                            <app-field-error-display [displayError]="isFieldValid('text')" errorMsg="Escribe el contenido de la publicación."></app-field-error-display>
                         </div>
                     </div>
                 </div>
                 <div class="row">
+                    Puedes elegir entre subir una imagen o introducir la url de un vídeo:
+                </div>
+                <div class="row">
                     <div class="col-md-6">
-                        <!--div class="form-group" [ngClass]="displayFieldCss('image')">
-                            <label for="image" class="control-label required">Url de imagen destacada</label>
-                            <div class="input-group">
-                                <input id="image" name="image" formControlName="image" type="url"  value="" class="form-control"/>
-                            </div>
-                            <app-field-error-display [displayError]="isFieldValid('image')" errorMsg="Escriba url válida con un máxinmo de 200 caracteres"></app-field-error-display>
-                        </div-->
-                        <label for="image">Imagen del artículo:</label>
+                        <label for="image">Imagen del artículo</label>
                         <image-upload [max]="1"
-                        url="/subirImagenPost/{{idpost}}"
+                        url="/subirImagen/{{idpost}}"
                         [uploadedFiles]="listadoAdjuntos"
                         [extensions]="['jpg','png','gif']"
                         (removed)="onRemoved($event)"
@@ -79,16 +75,16 @@
                         [objeto]="postId"
                         ></image-upload>     
                         <div *ngIf="errorUpload" class="error">
-                          Guarda el artículo antes de añadir la foto.
+                          Guarda el artículo antes de añadir una imagen.
                         </div>                   
                     </div>
                     <div class="col-md-6">
                         <div class="form-group" [ngClass]="displayFieldCss('video')">
-                            <label for="video" class="control-label required">Url video</label>
+                            <label for="video" class="control-label">URL del vídeo</label>
                             <div>
                                 <input  formControlName="video" type="text"  value="" class="full-width" />
                             </div>
-                            <app-field-error-display [displayError]="isFieldValid('video')" errorMsg="Escriba url válida con un máxinmo de 200 caracteres"></app-field-error-display>
+                            <app-field-error-display [displayError]="isFieldValid('video')" errorMsg="Escribe una url válida con un máximo de 200 caracteres."></app-field-error-display>
                         </div>
                     </div>
                 </div>

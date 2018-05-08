@@ -6,6 +6,10 @@ const validCharacters = /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?
 export class CustomValidators extends Validators {
   
   static validateUrl(control: FormControl) {
+    console.log(control);
+    if(control.value === null || control.value === ''){
+      return null;
+    }
     let check=control.value.includes('localhost') && control.value.startsWith('http://') && control.value.includes('.');
     return validCharacters.test(control.value) || check ? null :{ validUrl: true };
   }
