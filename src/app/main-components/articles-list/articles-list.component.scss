@@ -1,0 +1,30 @@
+.ordenable {
+    cursor: pointer;
+}
+
+.table{
+    border: 1px #A30006 solid;
+}
+
+tr{
+    font-family: 'metropolis-light';
+}
+
+tr:nth-child(odd) {
+    background-color: #d3d5d3;
+}
+
+.table th {
+    border: 1px #A30006 solid;
+    color: #A30006;
+    font-family: 'metropolis-medium';
+    background-color: #d8aa9c;
+}
+
+.manita {
+    cursor: pointer;
+}
+
+.table tbody tr:hover {
+  background-color: #D1D119;
+}

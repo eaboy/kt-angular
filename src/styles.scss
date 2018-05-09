@@ -45,8 +45,7 @@ html {
  }
  
  body {
-	padding-top: 4.5rem;
-    padding-top: 4.5rem;
+	padding-top: 3.5rem;
     word-wrap: break-word;
     text-rendering: optimizeLegibility;
     -webkit-overflow-scrolling: touch;
@@ -619,9 +618,6 @@ h1 {
     padding: 2.3rem;
  }
  
- #formulario {
-    padding-top: 3rem;
- }
  
  #formulario .form-field {
     margin-bottom: 3.9rem;
@@ -735,9 +731,6 @@ h1 {
     display: none;
  }
  
- textarea {
-    min-height: 25rem;
- }
  
  input[type="email"]:focus,
  input[type="number"]:focus,

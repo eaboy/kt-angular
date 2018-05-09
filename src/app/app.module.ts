@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from "./app-routing/app-routing.module";
 
 import { CommunicationService } from '@services/communication/communication.service';
-import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { CookieModule } from 'ngx-cookie';
 import { AuthService } from '@services/auth/auth.service';
 import { UsersService } from '@services/users/users.service';
 import { ArticlesService } from '@services/articles/articles.service';
@@ -19,13 +19,25 @@ import { FooterComponent } from '@components/footer/footer.component';
 import { ArticleComponent } from './main-components/article/article.component';
 import { QuillModule } from 'ngx-quill';
 import { BsDatepickerModule } from 'ngx-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserComponent } from './main-components/user/user.component';
 
 import { AlertComponent } from './shared/directives/index';
 import { AlertService } from '@services/alerts/index';
 import { FileInputAccessorModule } from "file-input-accessor";
 import { LogoutComponent } from "@components/logout/logout.component";
+import { ResetPasswordComponent } from "@components/reset-password/reset-password.component";
+import { ImageUploadComponent } from "@components/images-uploader/image-upload.component";
+import { ImageService } from "@components/images-uploader/image.service";
+import { FileDropDirective } from "@components/images-uploader/file-drop.directive";
+import { FieldErrorDisplayComponent } from '@components/field-error-display/field-error-display.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Ng2OrderModule } from 'ng2-order-pipe';
+import {NgxPaginationModule} from 'ngx-pagination';
 
+import { PopupWindowComponent } from './shared/popup-window/popup-window.component';
+import { ModalDeleteComponent } from './shared/popup-window/loader/modal-delete.component';
+import { LoaderViewChildComponent } from "./shared/popup-window/loader/loader-viewchild.component";
 
 
 @NgModule({
@@ -38,7 +50,15 @@ import { LogoutComponent } from "@components/logout/logout.component";
     ArticleComponent,
     UserComponent,
     AlertComponent,
-    LogoutComponent
+    LogoutComponent,
+    ResetPasswordComponent,
+    ImageUploadComponent,
+    FileDropDirective,
+    FieldErrorDisplayComponent,
+    PopupWindowComponent,
+    ModalDeleteComponent,
+    LoaderViewChildComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -49,17 +69,25 @@ import { LogoutComponent } from "@components/logout/logout.component";
     ReactiveFormsModule,
     QuillModule,
     BsDatepickerModule.forRoot(),
-    FileInputAccessorModule
+    FileInputAccessorModule,
+    NgbModule.forRoot(),
+    CookieModule.forRoot(),
+    Ng2SearchPipeModule,
+    Ng2OrderModule,
+    NgxPaginationModule
+    
   ],
   providers: [
-    CookieService,
     CommunicationService,
     AuthService,
     UsersService,
     ArticlesService,
-    AlertService
+    AlertService,
+    ImageService,
+    LoaderViewChildComponent,
+    PopupWindowComponent
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 
 

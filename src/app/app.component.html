@@ -1,3 +1,33 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
-<app-footer></app-footer>
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>CoderTexts - &Aacute;rea privada</title>
+      <meta name="description" content="Noticias de las últimas tecnologías. ">
+      <link rel="canonical" href="http://bdeveloper.es">
+      <meta name="keywords" content="Noticias, IT, Project, Web, Developer, Technology, HTML, js, css, python, node, angular">
+      <link rel="alternate" hreflang="x-default" href="http://bdeveloper.es" />
+      <meta name="robots" content="index,follow">
+      <meta name="author" content="Eduardo Aboy, Luis Barriga, Christian Gallego, Javier Lindo, José Luis Pilo">
+      <meta name="twitter:card" content="Página principal" />
+      <meta name="twitter:site" content="@CoderTexts" />
+      <meta name="twitter:title" content="Por la tecnología" />
+      <meta name="twitter:description" content="Las últimas noticias tecnológicas" />
+      <meta name="twitter:url" content="http://bdeveloper.es" />
+      <meta property="og:title" content="Por la tecnología" />
+      <meta property="og:description" content="Las últimas noticias tecnológicas" />
+      <meta property="og:url" content="http://bdeveloper.es" />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="CoderTexts" />
+  </head>
+  <body>    
+        <!--Cabecera-->
+        <app-header></app-header>
+        <!-- Ruta dinámica de las pantallas-->
+        <router-outlet></router-outlet>
+        <!--Módulo footer-->
+        <app-footer></app-footer>
+  </body>
+</html>

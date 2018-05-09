@@ -11,7 +11,7 @@ import { Article } from '@interfaces/articles';
 export class ArticlesService {
 
   private articlePath = `/article/`;
-  private articlesPath = `/articles/`;
+  private listArticlesPath = `/ownArticles/`;
   private categoriesPath = `/categories/all/`;
 
   constructor(private _CommunicationService: CommunicationService) {
@@ -35,7 +35,7 @@ export class ArticlesService {
 
   listArticles(id_user){
     //return this._CommunicationService.getData(`${this.articlesPath}all/`);
-    return this._CommunicationService.getData(`${this.articlesPath}user/`+id_user);
+    return this._CommunicationService.getData(`${this.listArticlesPath}`+id_user);
   }
 
   listCategories(){

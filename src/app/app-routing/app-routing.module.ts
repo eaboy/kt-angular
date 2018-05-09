@@ -8,6 +8,7 @@ import { AuthService } from '@services/auth/auth.service';
 import { AppComponent } from '../app.component';
 import { UserComponent } from '@components/user/user.component';
 import { LogoutComponent } from "@components/logout/logout.component";
+import { ResetPasswordComponent } from "@components/reset-password/reset-password.component";
 
 const appRoutes: Routes = [
 
@@ -24,6 +25,10 @@ const appRoutes: Routes = [
 		path: 'logout',
 		component: LogoutComponent
     },    
+    {
+		path: 'resetPassword',
+		component: ResetPasswordComponent
+    },      
     {
 		path: 'articles-list',
         component: ArticlesListComponent,

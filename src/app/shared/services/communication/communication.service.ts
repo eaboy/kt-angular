@@ -11,8 +11,8 @@ export class CommunicationService {
     constructor(private _http: HttpClient, private _authService: AuthService) { }
 
     private setHeaders() {
-        const token = this._authService.getToken();
-        const headers = { 'Content-Type': 'application/json' };
+        let headers = { 'Content-Type': 'application/json' };
+        
         return { headers: new HttpHeaders(headers) };
     }
     private baseUrl = environment.apiUrl;
@@ -28,6 +28,11 @@ export class CommunicationService {
     editData(url: string, body: object): Observable<any> {
         return this._http.put(this.baseUrl + url, body, this.setHeaders());
     }
+
+    patchData(url: string, body: object): Observable<any> {
+        return this._http.patch(this.baseUrl + url, body, this.setHeaders());
+    }
+
 
     deleteData(url: string): Observable<any> {
         return this._http.delete(this.baseUrl + url, this.setHeaders());
