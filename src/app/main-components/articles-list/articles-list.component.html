@@ -35,7 +35,7 @@
           <th>Acciones</th>
         </tr>
         <tr *ngFor="let article of articles$ | async | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }" >
-          <td><img src="{{ article.image }}" alt="{{ article.title }}" width="200px"></td>
+          <td><img src="/media/posts/{{ article.id }}.jpg" alt="{{ article.title }}" width="200px"></td>
           <td>{{ article.title }}</td>
           <td>{{ article.pub_date }}</td>
           <td>

@@ -19,13 +19,14 @@ export class ArticlesListComponent implements OnInit {
   popup : ModalDeleteComponent;
 
   articles$: Observable<Article[]>;
+  filter: string;
 
   constructor(private _articlesService: ArticlesService,
               private _usersservice: UsersService,
               private _activatedRoute: ActivatedRoute,
               private _alerservice: AlertService) { }
   
-  idus:string;
+  idus:number;
   postId: Article;
   //sorting
   key: string = 'pub_date'; //por defecto es la fecha de publicación del post

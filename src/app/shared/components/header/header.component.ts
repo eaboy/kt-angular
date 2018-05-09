@@ -11,17 +11,16 @@ export class HeaderComponent implements OnInit {
   usernameh:string;
 
   constructor(private _usersservice: UsersService) { 
-    _usersservice.estaLogueado.subscribe(log =>{
+  }
+  
+  ngOnInit() {
+    this._usersservice.estaLogueado.subscribe(log =>{
         if(log){
           this.usernameh=this._usersservice.getUserName();
         }else{
           this.usernameh = null;
         }
     });
-  }
-  
-  ngOnInit() {
-    this.usernameh=this._usersservice.getUserName();
   }
 
 }
