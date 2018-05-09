@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit,ViewChild, } from '@angular/core';
 import { CommunicationService } from '../../shared/services/communication/communication.service';
 import { ArticlesService } from '../../shared/services/articles/articles.service';
 import { Article } from '../../interfaces/articles';
@@ -6,7 +6,7 @@ import { Category } from '../../interfaces/category';
 import * as moment from 'moment';
 import { FormGroup, FormControl, FormArray, NgForm, FormBuilder, Validators } from '@angular/forms';
 import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Location } from '@angular/common';
 import { UsersService } from '@services/users/users.service';
@@ -38,7 +38,8 @@ export class ArticleComponent implements OnInit {
               private _activatedRoute: ActivatedRoute,
               private location: Location,
               private _usersservice: UsersService,
-              private _imagesService: ImageService) {
+              private _imagesService: ImageService,
+              private router: Router) {
 
         _imagesService.mensajeError.subscribe(log =>{
         if(log === null){
@@ -151,7 +152,7 @@ export class ArticleComponent implements OnInit {
             this._imagesService.idArticulo = data.id;
             this.popup.showPopup("Información");
             this.popup.texto="Artículo creado correctamente. Si quieres, puedes añadirle una imagen.";
-            location.assign('/article/'+data.id);
+            this.router.navigate(['/article/', data.id]);
           }else{
             this.popup.showPopup("ERROR");
             this.popup.texto="Artículo no creado";
